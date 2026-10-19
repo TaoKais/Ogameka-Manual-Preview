@@ -1,6 +1,6 @@
 # Notices
 
-OGAMEKA Manual Preview 0.1.0 is distributed under Apache License 2.0 as described in [LICENSE-SCOPE.md](LICENSE-SCOPE.md).
+OGAMEKA Manual Preview 0.1.1 is distributed under Apache License 2.0 as described in [LICENSE-SCOPE.md](LICENSE-SCOPE.md).
 
 The manual preview's application code, interface and synthetic screenshots were prepared specifically for this edition. It contains no OGame/Gameforge artwork, old extension, legacy bridge, catalog, Grafana image or runtime npm dependency. Node.js is an external prerequisite and is not bundled.
 

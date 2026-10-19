@@ -19,6 +19,13 @@ async function pair(app){
 }
 const post=(app,url,cookie,data)=>fetch(app.url+url,{method:'POST',headers:{Origin:app.url,Cookie:cookie,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify(data)});
 
+test('the synthetic demo provides ten varied planets for the multi-planet charts',()=>{
+  const sample=demo(),metals=sample.bodies.map(body=>body.production.metal.value);
+  assert.equal(sample.bodies.length,10);
+  assert.ok(sample.bodies.every((body,index)=>body.name===`Planeta simulado ${String(index+1).padStart(2,'0')}`));
+  assert.ok(new Set(metals).size>1);
+});
+
 test('standalone manual preview pairs locally and calculates the synthetic scenario',async t=>{
   const app=await setup(t),page=await fetch(app.url),html=await page.text();
   assert.equal(page.status,200);

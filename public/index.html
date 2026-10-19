@@ -1,9 +1,125 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OGMK · laboratorio independiente</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head><body>
-<header><a href="/" class="brand">OGMK<small>OGAMEKA · PRELIMINAR MANUAL</small></a><div><span class="badge">LOCAL · SIN TELEMETRÍA</span><h1>Economía observable. Decisiones revisables.</h1></div></header>
-<p id="status" role="status">Esta edición no se conecta a OGame. Usa datos sintéticos o una entrada manual revisada.</p>
-<section id="pairing"><h2>Conectar esta ventana al proceso local</h2><p>Lee el código de un solo uso en pair-code.txt, dentro del directorio privado de esta instancia. Caduca en cinco minutos y se elimina al emparejar. La sesión dura una hora.</p><form id="pairForm"><label>Código <input id="pairCode" type="password" inputmode="numeric" minlength="8" maxlength="8" autocomplete="off" required></label><button>Emparejar</button></form></section>
-<main id="workspace" hidden><nav><button data-page="economy">Escenario</button><button data-page="data">Datos y privacidad</button><span>Sin acciones, alarmas ni peticiones al juego</span></nav>
-<div id="economy" class="page"><section class="panel"><div class="heading"><h2>Plan económico manual</h2><button id="demo">Cargar demostración sintética</button></div><p>Precios, duraciones y ganancias son hipótesis introducidas por ti. No son fórmulas validadas de OGame.</p><label>Cuenta <select id="account"></select></label><div class="controls"><label>Periodo <select id="horizon"><option value="720">1 mes</option><option value="2160">3 meses</option><option value="4320">6 meses</option></select></label><label>Muestreo <select id="step"><option value="6">6 horas</option><option value="1">1 hora</option><option value="24">1 día</option></select></label><label>Ejecución <select id="execution"><option value="parallel">Simultánea por planeta</option><option value="sequential">Secuencial</option></select></label></div><label>Objetivos (JSON con id, bodyId, cost, gain y durationHours)<textarea id="goals" rows="9" spellcheck="false"></textarea></label><button id="analyze">Analizar hipótesis</button><small>Recursos centralizados. Se excluyen transporte, colas del juego y cambios operativos automáticos.</small></section>
-<section class="panel"><h2>Proyección condicional</h2><div id="kpis" class="kpis"></div><svg id="chart" viewBox="0 0 800 240" role="img" aria-label="Ventaja económica prevista"></svg><div class="scroll"><table><thead><tr><th>Evento</th><th>Objetivo</th><th>Planeta</th><th>Hora</th></tr></thead><tbody id="events"></tbody></table></div><p id="limits">Los datos ausentes, antiguos o provisionales bloquean el análisis cuando son críticos.</p><div class="scroll"><table><thead><tr><th>Cuerpo</th><th>Metal / h</th><th>Cristal / h</th><th>Deuterio / h</th><th>Energía</th></tr></thead><tbody id="bodies"></tbody></table></div></section></div>
-<div id="data" class="page" hidden><section class="panel"><h2>Importación explícita</h2><p>Solo se aceptan datos económicos del contrato ogmk.capture/1. No incluyas sesiones, mensajes, flotas ni informes.</p><label>Captura manual revisada<textarea id="capture" rows="12" spellcheck="false"></textarea></label><button id="import">Validar y guardar</button><p>Los datos se almacenan únicamente en el directorio de esta instancia independiente.</p></section><section class="panel"><h2>Retención y borrado</h2><div class="controls"><label>Días de historial <input id="days" type="number" min="1" max="365" value="30"></label><label>Capturas por cuenta <input id="snapshots" type="number" min="1" max="120" value="120"></label></div><button id="retention">Aplicar y podar</button><button id="support">Exportar diagnóstico anonimizado</button><p>El diagnóstico solo contiene recuentos y calidades. Omite nombres, identificadores originales, coordenadas, cantidades, niveles y fechas.</p><h3>Borrar esta instancia</h3><p>Elimina cuentas, historial y copias locales de este nuevo almacén, y cierra su sesión. No borra la extensión anterior, IndexedDB, archivos exportados ni volúmenes Docker.</p><label>Escribe BORRAR OGAMEKA INDEPENDIENTE <input id="confirmation" autocomplete="off"></label><button id="wipe" class="danger">Borrar datos de esta instancia</button></section></div>
-</main><footer><span>Preliminar de investigación · sin certificación de seguridad, exactitud ni tolerancia de Origin · sin módulos de captura incluidos</span><a href="https://ko-fi.com/yahvveh" target="_blank" rel="noopener noreferrer">Apoyar OGAMEKA en Ko-fi · opcional</a></footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080e19">
+  <title>OGAMEKA · cartografía económica</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="OGAMEKA, inicio">
+        <span class="brand-mark" aria-hidden="true">O</span>
+        <span class="brand-copy"><strong>OGMK</strong><small>OGAMEKA · MANUAL LAB</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="live-pill"><i></i> LOCAL · SIN TELEMETRÍA</span>
+        <span class="edition-pill">PREVIEW 0.1.1</span>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">INTELIGENCIA ECONÓMICA · EDICIÓN MANUAL</p>
+        <h1>Lee el imperio<br><span>planeta a planeta.</span></h1>
+        <p class="intro-copy">Una mesa de análisis local para comparar producción, escenarios y horizontes sin consultar el juego.</p>
+      </div>
+      <div class="intro-art" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+        <span class="orbit-core"></span><span class="orbit-node node-a"></span><span class="orbit-node node-b"></span>
+        <span class="art-caption">OBSERVAR · COMPARAR · DECIDIR</span>
+      </div>
+    </section>
+
+    <div id="status" class="status-banner" role="status"><span class="status-dot"></span>Esta edición no se conecta a OGame. Usa únicamente datos sintéticos o una entrada manual revisada.</div>
+
+    <section id="pairing" class="pair-card">
+      <div class="pair-icon" aria-hidden="true">⌘</div>
+      <div class="pair-copy"><p class="eyebrow">SESIÓN LOCAL AISLADA</p><h2>Conecta esta ventana</h2><p>Lee el código de un solo uso en <code>pair-code.txt</code>, dentro del directorio privado de esta instancia. Caduca en cinco minutos.</p></div>
+      <form id="pairForm"><label for="pairCode">Código local</label><div class="pair-input"><input id="pairCode" type="password" inputmode="numeric" minlength="8" maxlength="8" autocomplete="off" required><button class="button-primary">Emparejar <span>→</span></button></div></form>
+    </section>
+
+    <main id="workspace" hidden>
+      <nav class="tabs" aria-label="Secciones">
+        <button class="tab active" data-page="economy"><span>01</span> Cartografía</button>
+        <button class="tab" data-page="data"><span>02</span> Datos y privacidad</button>
+        <span class="tabs-note">Sin acciones, alarmas ni peticiones al juego</span>
+      </nav>
+
+      <section id="economy" class="page">
+        <section class="visual-section">
+          <div class="section-title-row">
+            <div><p class="eyebrow">MESA PLANETARIA</p><h2>Distribución de producción</h2><p class="section-copy">Cada sector representa la aportación relativa de un planeta. El histograma agrupa los valores por intervalo.</p></div>
+            <div class="simulation-flag"><span id="viz-source-mark">—</span><b id="viz-source-label">CARGA UNA DEMO</b></div>
+          </div>
+
+          <div class="metric-row" id="planet-metrics" aria-live="polite">
+            <article class="metric-card"><span class="metric-label">PLANETAS ANALIZADOS</span><strong id="metric-planets">—</strong><small>cuerpos con dato válido</small></article>
+            <article class="metric-card"><span class="metric-label">RECURSO SELECCIONADO</span><strong id="metric-resource">—</strong><small id="metric-quality">sin captura cargada</small></article>
+            <article class="metric-card accent-card"><span class="metric-label">PRODUCCIÓN TOTAL</span><strong id="metric-total">—</strong><small id="metric-unit">unidades por hora</small></article>
+            <article class="metric-card"><span class="metric-label">DISPERSIÓN</span><strong id="metric-spread">—</strong><small>mínimo a máximo por planeta</small></article>
+          </div>
+
+          <div class="chart-grid">
+            <article class="visual-card donut-card">
+              <div class="visual-head"><div><h3>Cuota por planeta</h3><p>Reparto porcentual del recurso</p></div><span class="chart-tag">SECTORES</span></div>
+              <div class="donut-layout">
+                <div class="donut-wrap"><svg id="planet-pie" viewBox="0 0 240 240" role="img" aria-label="Gráfico de sectores de producción por planeta"><circle class="donut-track" cx="120" cy="120" r="78"></circle><g id="pie-slices"></g><text id="pie-center-value" x="120" y="116" text-anchor="middle">—</text><text id="pie-center-label" x="120" y="139" text-anchor="middle">UNIDADES/H</text></svg></div>
+                <ul id="pie-legend" class="chart-legend"></ul>
+              </div>
+              <p class="chart-footnote">Sectores calculados solo con los planetas que tienen un valor numérico para este recurso.</p>
+            </article>
+
+            <article class="visual-card histogram-card">
+              <div class="visual-head"><div><h3>Histograma planetario</h3><p>Frecuencia de producción por intervalo</p></div><label class="select-compact">RECURSO<select id="chartResource" aria-label="Recurso que se muestra en las gráficas"><option value="metal">Metal / h</option><option value="crystal">Cristal / h</option><option value="deuterium">Deuterio / h</option></select></label></div>
+              <div class="histogram-wrap"><svg id="planet-histogram" viewBox="0 0 620 270" role="img" aria-label="Histograma de producción por planeta"></svg></div>
+              <div class="histogram-caption"><span><i class="legend-square"></i><b id="hist-count">0</b> planetas en la distribución</span><span>Rango de valores <b id="hist-range">—</b></span></div>
+            </article>
+          </div>
+          <p id="chart-quality-note" class="chart-disclaimer"><span>i</span> En la demo todos los valores son simulados. Las gráficas describen los datos cargados; no verifican fórmulas ni representan una cuenta real.</p>
+        </section>
+
+        <div class="analysis-grid">
+          <section class="panel controls-panel">
+            <div class="panel-heading"><div><p class="eyebrow">ESCENARIOS</p><h2>Plan económico manual</h2></div><button id="demo" class="button-secondary">Cargar demo <span>↗</span></button></div>
+            <p class="muted-copy">Precios, duraciones y ganancias son hipótesis de ejemplo, no fórmulas validadas de OGame.</p>
+            <label>Cuenta<select id="account"></select></label>
+            <div class="controls-grid">
+              <label>Horizonte<select id="horizon"><option value="720">1 mes</option><option value="2160">3 meses</option><option value="4320">6 meses</option></select></label>
+              <label>Muestreo<select id="step"><option value="6">6 horas</option><option value="1">1 hora</option><option value="24">1 día</option></select></label>
+              <label class="wide-control">Ejecución<select id="execution"><option value="parallel">Simultánea por planeta</option><option value="sequential">Secuencial</option></select></label>
+            </div>
+            <label for="goals">Objetivos del escenario <span class="label-note">JSON editable · coste, ganancia y duración</span></label>
+            <textarea id="goals" rows="7" spellcheck="false"></textarea>
+            <button id="analyze" class="button-primary analyze-button">Analizar hipótesis <span>→</span></button>
+            <p class="privacy-inline"><span>◇</span> Recursos centralizados. Se excluyen transporte, colas del juego y cambios operativos automáticos.</p>
+          </section>
+
+          <section class="panel projection-panel">
+            <div class="panel-heading"><div><p class="eyebrow">MODELO CONDICIONAL</p><h2>Proyección de ventaja</h2></div><span class="chart-tag">NO ES UN ÓPTIMO GLOBAL</span></div>
+            <div id="kpis" class="kpis"><div class="kpi-empty">Ejecuta un escenario para ver el resumen comparativo.</div></div>
+            <svg id="chart" viewBox="0 0 800 260" role="img" aria-label="Proyección condicional del escenario"></svg>
+            <div class="projection-legend"><span><i class="projection-line"></i> Ventaja prevista · unidades equivalentes</span><span id="projection-horizon">A la espera de análisis</span></div>
+            <p id="limits" class="assumptions">Los datos ausentes, antiguos o provisionales bloquean el análisis cuando son críticos.</p>
+            <div class="table-heading"><h3>Producción del conjunto</h3><span>POR HORA</span></div>
+            <div class="scroll"><table><thead><tr><th>Planeta</th><th>Metal</th><th>Cristal</th><th>Deuterio</th><th>Energía</th></tr></thead><tbody id="bodies"></tbody></table></div>
+          </section>
+        </div>
+        <section class="panel events-panel"><div class="table-heading"><div><p class="eyebrow">CALENDARIO</p><h2>Eventos del escenario</h2></div><span>SECUENCIA ESTIMADA</span></div><div class="scroll"><table><thead><tr><th>Fase</th><th>Objetivo</th><th>Planeta</th><th>Hora</th></tr></thead><tbody id="events"></tbody></table></div></section>
+      </section>
+
+      <section id="data" class="page data-page" hidden>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">ENTRADA DEL USUARIO</p><h2>Importación explícita</h2></div><span class="chart-tag">CONTRATO OGMK / 1</span></div><p>Solo se aceptan datos económicos del contrato <code>ogmk.capture/1</code>. No incluyas sesiones, mensajes, flotas ni informes.</p><label for="capture">Captura manual revisada</label><textarea id="capture" rows="13" spellcheck="false"></textarea><button id="import" class="button-primary">Validar y guardar <span>→</span></button><p>Los datos se almacenan únicamente en el directorio de esta instancia independiente.</p></section>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CICLO DE VIDA LOCAL</p><h2>Retención y borrado</h2></div></div><div class="controls-grid"><label>Días de historial<input id="days" type="number" min="1" max="365" value="30"></label><label>Capturas por cuenta<input id="snapshots" type="number" min="1" max="120" value="120"></label></div><button id="retention" class="button-secondary">Aplicar retención</button><button id="support" class="button-secondary">Exportar diagnóstico anónimo</button><p>El diagnóstico solo contiene recuentos y calidades. Omite nombres, identificadores originales, coordenadas, cantidades, niveles y fechas.</p><div class="danger-zone"><p class="eyebrow">BORRADO ACOTADO</p><h3>Eliminar datos de esta instancia</h3><p>Elimina cuentas, historial y copias locales de este nuevo almacén, y cierra su sesión. No borra la extensión anterior, IndexedDB, archivos exportados ni volúmenes Docker.</p><label>Escribe BORRAR OGAMEKA INDEPENDIENTE<input id="confirmation" autocomplete="off"></label><button id="wipe" class="button-danger">Borrar datos de esta instancia</button></div></section>
+      </section>
+    </main>
+
+    <footer><span>PRELIMINAR DE INVESTIGACIÓN · SIN TOLERANCIA NI EXACTITUD CERTIFICADAS · SIN CAPTURA INCLUIDA</span><a href="https://ko-fi.com/yahvveh" target="_blank" rel="noopener noreferrer">Apoyar OGAMEKA · opcional ↗</a></footer>
+  </div>
+</body>
+</html>

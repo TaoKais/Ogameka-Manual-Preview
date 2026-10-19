@@ -2,7 +2,7 @@
 
 **A local-first planning prototype for OGame players.** Enter or import economic observations, compare a small set of construction scenarios, and inspect conditional projections on your own computer.
 
-> **Preview 0.1.0.** This edition is deliberately manual and separate from the existing capture extension. It is not an official OGame product, has not been reviewed or declared tolerated by Gameforge/Origin, and its estimates are not validated game formulas or a global optimum.
+> **Preview 0.1.1.** This edition is deliberately manual and separate from the existing capture extension. It is not an official OGame product, has not been reviewed or declared tolerated by Gameforge/Origin, and its estimates are not validated game formulas or a global optimum.
 
 **Español:** [descripción y guía en español](#español) · **English:** [overview and guide](#english)
 
@@ -10,7 +10,7 @@
 
 Screenshots show the included synthetic demonstration. They contain no account data.
 
-![OGAMEKA manual preview: synthetic economy scenario and conditional projection](public/screenshots/overview.png)
+![OGAMEKA manual preview: ten synthetic planets shown as a production share doughnut and frequency histogram, with scenario projection](public/screenshots/overview.png)
 
 ![OGAMEKA manual preview: explicit data import, retention and deletion controls](public/screenshots/privacy-and-retention.png)
 
@@ -21,6 +21,7 @@ Screenshots show the included synthetic demonstration. They contain no account d
 - Runs as a local Node.js service bound to `127.0.0.1`.
 - Accepts a built-in synthetic demo or an explicit, validated economic data import.
 - Compares sequential and per-planet parallel scenarios over 30, 90 or 180 days.
+- Visualizes multi-planet production with a per-planet doughnut chart and a frequency histogram; switch between metal, crystal and deuterium.
 - Shows the assumptions, event timeline, resource balance and conditional projection.
 - Keeps account data in this instance's local store; retention and scoped deletion are available.
 - Provides a minimized support export. No telemetry or central account service is included.
@@ -77,6 +78,7 @@ The files in this standalone manual edition are offered under **Apache License 2
 - Se ejecuta como servicio local de Node.js, ligado a `127.0.0.1`.
 - Incluye una demo sintética y admite importar explícitamente datos económicos validados.
 - Compara escenarios secuenciales y paralelos por planeta en periodos de 30, 90 o 180 días.
+- Representa la producción de varios planetas en un gráfico de sectores y un histograma; permite cambiar entre metal, cristal y deuterio.
 - Muestra hipótesis, calendario de eventos, saldo de recursos y proyección condicional.
 - Guarda los datos en el almacén local de esta instancia; permite configurar retención y borrado acotado.
 - Permite exportar un diagnóstico minimizado. No incluye telemetría ni servicio central de cuentas.

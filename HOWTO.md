@@ -42,6 +42,8 @@ Select **Cargar demostración sintética**. Confirm that the account is marked `
 
 The displayed projection depends on entered prices, durations, production gains, initial stocks and model assumptions. It does not submit orders to OGame and does not prove a global optimum.
 
+The planet overview starts with a doughnut chart that assigns one sector to each planet and a histogram that groups planet production into value ranges. Use the **Resource** selector to compare metal, crystal and deuterium. The demo chart is intentionally synthetic; it is useful for exploring the interface, not as a prediction of a real empire.
+
 ## 5. Import your own reviewed economic data (optional)
 
 Open **Datos y privacidad** and paste a JSON document that follows [`CONTRACT.md`](CONTRACT.md). Choose **Validar y guardar**. The contract rejects unsupported fields and invalid or oversized inputs. Do not include login/session data, messages, fleet details, espionage reports or information about another player. Review every value and its observation date before planning.
