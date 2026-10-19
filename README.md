@@ -2,7 +2,7 @@
 
 **A local-first planning prototype for OGame players.** Enter or import economic observations, compare a small set of construction scenarios, and inspect conditional projections on your own computer.
 
-> **Preview 0.2.0.** Includes a real, user-triggered Manifest V3 capture extension and a local planner. The extension is **not listed as tolerated by Origin**; do not use it on a live OGame account unless the exact version is officially tolerated. This is not an official OGame product, and estimates are not validated game formulas or a global optimum.
+> **Preview 0.2.1.** Includes a real, user-triggered Manifest V3 capture extension and a local planner. The extension is **not listed as tolerated by Origin**; do not use it on a live OGame account unless the exact version is officially tolerated. This is not an official OGame product, and estimates are not validated game formulas or a global optimum.
 
 **Español:** [descripción y guía en español](#español) · **English:** [overview and guide](#english)
 

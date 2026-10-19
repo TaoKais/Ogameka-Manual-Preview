@@ -1,6 +1,6 @@
 # License scope
 
-The Apache License 2.0 in `LICENSE` applies only to the standalone **OGAMEKA Manual Preview 0.2.0** source and documentation distributed in this edition, including its UI, local service, user-triggered capture extension, synthetic demonstration, tests and screenshots created for this preview.
+The Apache License 2.0 in `LICENSE` applies only to the standalone **OGAMEKA Manual Preview 0.2.1** source and documentation distributed in this edition, including its UI, local service, user-triggered capture extension, synthetic demonstration, tests and screenshots created for this preview.
 
 It does not license the historic integrated application elsewhere in the original repository, the old capture extension or bridge, imported catalogs, OGame/Gameforge text or artwork, trademarks, fonts, Grafana or plugins, or any third-party dependency or contribution not expressly listed in `NOTICE.md`. Those components are excluded from this manual preview package.
 

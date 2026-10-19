@@ -1,7 +1,7 @@
 {
   "format": 1,
   "edition": "manual-preview",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "Apache-2.0 (scope defined by LICENSE-SCOPE.md)",
   "files": [
     {
@@ -47,7 +47,7 @@
     {
       "path": "LICENSE-SCOPE.md",
       "bytes": 1318,
-      "sha256": "5f6fa10d74b0ae40b19d2f75ffef3de6f1c5ede12dbb0a06597da8fa53ab2dc3"
+      "sha256": "e42b754e0cc1234b87ba5168c79311bb425fd0a967108e1d75ff0c83165ec72b"
     },
     {
       "path": "MIGRATION.md",
@@ -57,7 +57,7 @@
     {
       "path": "NOTICE.md",
       "bytes": 898,
-      "sha256": "1f6cc8cb1084f2a62d847737e0ba4269a468319847bce548c8bbb039f85f1691"
+      "sha256": "795404c4a126852bcf58c3a908a91da5bbead7526f0cb5648cc029797675f705"
     },
     {
       "path": "PRIVACY.md",
@@ -67,7 +67,7 @@
     {
       "path": "README.md",
       "bytes": 12895,
-      "sha256": "f8f59c5a2b48aab9de983e58c8ad9168845331a5dfb3fe6e7ba83f47fc1b2380"
+      "sha256": "8d9dbe348c9b379fd625edcdfadb0341cd2f2248712b645992846e33d5bc784a"
     },
     {
       "path": "extension/capture.js",
@@ -82,7 +82,7 @@
     {
       "path": "extension/popup.html",
       "bytes": 1751,
-      "sha256": "ae6076b7126e102eb146fd7a65f5cdc622b19d921b78dbaf3bd3411927487c2f"
+      "sha256": "c3bea021533e3ad7507a1bf6a2df8cfeccc621e242a9c5c4a7cb4d31d8eb4738"
     },
     {
       "path": "extension/popup.js",
@@ -92,12 +92,12 @@
     {
       "path": "manifest.json",
       "bytes": 345,
-      "sha256": "f20521b305dba6a4e4d279891522e5db13519abf6880e41bfd36a761a737ca5f"
+      "sha256": "8965ad824120b73a39e290e10a928301a2da49cd45b20aff5440b2d30397ae68"
     },
     {
       "path": "package.json",
       "bytes": 273,
-      "sha256": "0c68a9248c15559f521465add233c246bada162541214a8ad6134a5e5406b9d2"
+      "sha256": "4a5ff07bcdcf143c69c2846331b42dff9bbbf65a963e203e263a07535126838c"
     },
     {
       "path": "public/app.js",
@@ -107,7 +107,7 @@
     {
       "path": "public/index.html",
       "bytes": 11498,
-      "sha256": "02cd7120ca74bf2c172c42df56db185f11073b73fa207d5d5fc5543341156425"
+      "sha256": "8c7e1bdeb14195497faa05e4a6ae2a1107a9060bc1d1a5fd483cc946908714f6"
     },
     {
       "path": "public/screenshots/overview.png",
@@ -152,12 +152,12 @@
     {
       "path": "src/privacy.mjs",
       "bytes": 522,
-      "sha256": "0a5ee264527f813142a373b8c4749f7832e3bb1163f3e7a5a9896ab8e5d722d8"
+      "sha256": "592e807bee1263c2f7a6363648f25e3313ff09d53c4119cbe250e32d9470d0ca"
     },
     {
       "path": "src/server.mjs",
       "bytes": 8884,
-      "sha256": "da6d3d4f1e6edab8c34c2ccc0d3e74e24a3f7e6e549eabd399c66f8bf7e526b3"
+      "sha256": "d8e807c0b9cf00e76caf59814dea1c76898bf57fc39cc8936b9d2189b4e9b88f"
     },
     {
       "path": "src/store.mjs",

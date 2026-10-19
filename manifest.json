@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OGAMEKA Capture Preview",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "User-triggered, local-first capture of visible OGame economy data.",
   "action": {
     "default_title": "Capture visible OGame data",
