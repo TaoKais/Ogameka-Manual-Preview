@@ -41,11 +41,12 @@ The built-in demo is synthetic. Imported values are user-provided observations, 
 Requires Node.js 24.x. No npm install or runtime package download is needed.
 
 ```powershell
-Set-Location <path-to-preview>
-node src/server.mjs
+# Open PowerShell in the extracted repository root (the folder containing src and manifest.json).
+Test-Path .\src\server.mjs
+node .\src\server.mjs
 ```
 
-Open <http://127.0.0.1:3176>. Read the one-time pairing code from `.data-independent/pair-code.txt` in the same directory, enter it in the page, and choose **Cargar demostración sintética**. Select a horizon and press **Analizar hipótesis**. See [HOWTO.md](HOWTO.md) for the full Windows walkthrough, manual JSON import, data location and shutdown steps.
+Keep that PowerShell window open. It must print `OGMK manual preliminary: http://127.0.0.1:3176`; if Node reports an error or you close the window, the address will not load. In a browser, open <http://127.0.0.1:3176>. In a second PowerShell window opened in the same repository root, read `.data-independent/pair-code.txt`, enter the one-time code in the page, and choose **Cargar demostración sintética**. Select a horizon and press **Analizar hipótesis**. See [HOWTO.md](HOWTO.md) for the full Windows walkthrough, manual JSON import, data location and shutdown steps.
 
 The ZIP includes `manifest.json` at its root so Opera GX/Chromium can load the extracted folder as an unpacked extension. The extension captures real visible values only after a click and presents JSON for manual import; it does not query or send anything automatically. **Do not use it on a live account while this version is not listed as tolerated by Origin.** See [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) for scope and limitations.
 
@@ -104,11 +105,12 @@ La demo contiene datos sintéticos. Los datos importados son observaciones aport
 Requiere Node.js 24.x. No hace falta instalar paquetes npm ni descargar dependencias de ejecución.
 
 ```powershell
-Set-Location <ruta-de-la-preliminar>
-node src/server.mjs
+# Abre PowerShell en la raíz extraída (la carpeta que contiene src y manifest.json).
+Test-Path .\src\server.mjs
+node .\src\server.mjs
 ```
 
-Abre <http://127.0.0.1:3176>. Lee el código de emparejamiento de un solo uso en `.data-independent/pair-code.txt`, en ese mismo directorio, introdúcelo en la página y pulsa **Cargar demostración sintética**. Elige el periodo y pulsa **Analizar hipótesis**. Consulta [HOWTO.md](HOWTO.md) para la guía completa en Windows, la importación JSON, la ubicación de datos y el cierre.
+Deja abierta esa ventana de PowerShell. Debe mostrar `OGMK manual preliminary: http://127.0.0.1:3176`; si Node informa de un error o cierras la ventana, la dirección no cargará. En el navegador, abre <http://127.0.0.1:3176>. En una segunda ventana de PowerShell, también situada en la raíz del repositorio, lee `.data-independent/pair-code.txt`, introduce el código de un solo uso en la página y pulsa **Cargar demostración sintética**. Elige el periodo y pulsa **Analizar hipótesis**. Consulta [HOWTO.md](HOWTO.md) para la guía completa en Windows, la importación JSON, la ubicación de datos y el cierre.
 
 El ZIP incluye `manifest.json` en la raíz para cargar la carpeta descomprimida en Opera GX/Chromium. La extensión captura valores visibles reales solo tras pulsar su botón y muestra JSON para importarlo manualmente; no consulta ni transmite datos automáticamente. **No la uses con una cuenta activa mientras esta versión no esté listada como tolerada por Origin.** Consulta [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) para conocer su alcance y límites.
 

@@ -36,8 +36,8 @@
     },
     {
       "path": "HOWTO.md",
-      "bytes": 7515,
-      "sha256": "3fd48f279a8122199d4db1be0862e84d4ba83624d2a57e249d2cf2ca0a5ce4bd"
+      "bytes": 8273,
+      "sha256": "6f8046c8e22db7503a7416073bd7d68eedb34bff07ab4db3ca3e981103b828b1"
     },
     {
       "path": "LICENSE",
@@ -66,8 +66,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 12271,
-      "sha256": "dc112cf87db7c808a8cc2f6d9efcd627f47c1d5d87f4df76113f3dc0d4f84c0b"
+      "bytes": 12895,
+      "sha256": "f8f59c5a2b48aab9de983e58c8ad9168845331a5dfb3fe6e7ba83f47fc1b2380"
     },
     {
       "path": "extension/capture.js",

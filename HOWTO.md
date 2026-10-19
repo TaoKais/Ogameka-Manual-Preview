@@ -20,24 +20,24 @@ Origin's current rule says installed extensions running on an OGame tab must be 
 
 ## 3. Start an isolated instance
 
-In a new PowerShell window:
+Open PowerShell with its current directory set to the extracted repository root, which contains both `manifest.json` and `src\server.mjs`. Check that you are in the right folder, then start the service:
 
 ```powershell
-Set-Location <path-to-preview>
-node src/server.mjs
+Test-Path .\manifest.json
+Test-Path .\src\server.mjs
+node .\src\server.mjs
 ```
 
-The service binds to `127.0.0.1:3176`. It uses `.data-independent` under this directory. This location is independent of the existing OGAMEKA Docker volumes. Choose a private directory and do not put it in a shared or cloud-synced folder if that does not match your privacy needs.
+Both `Test-Path` commands must return `True`. Keep this PowerShell window open. On success, Node prints `OGMK manual preliminary: http://127.0.0.1:3176`; the URL will refuse connections if the process is stopped or failed to start. The service binds to `127.0.0.1:3176`. It uses `.data-independent` under this directory. This location is independent of the existing OGAMEKA Docker volumes. Choose a private directory and do not put it in a shared or cloud-synced folder if that does not match your privacy needs.
 
-When running from the full development checkout instead of the standalone preview branch/package, use `<path-to-repository>\independent` as the working directory.
+When running from the full development checkout instead of this standalone preview package, use its `independent` directory as the working directory.
 
 ## 4. Pair this browser window
 
-Open <http://127.0.0.1:3176>. In a second PowerShell window, read the one-time code:
+With the server still running, open <http://127.0.0.1:3176> in your browser. In a second PowerShell window opened in the same repository root, read the one-time code:
 
 ```powershell
-Set-Location <path-to-preview>
-Get-Content .data-independent\pair-code.txt
+Get-Content .\.data-independent\pair-code.txt
 ```
 
 Enter the code in the page and select **Emparejar**. The code expires after five minutes and is removed after pairing. Keep it private. The local session expires after one hour.
@@ -99,22 +99,22 @@ La preliminar usa módulos incluidos con Node. No ejecutes `npm install`.
 
 ### Iniciar una instancia aislada
 
-Desde la raíz de la rama o paquete preliminar:
+Abre PowerShell en la raíz extraída del repositorio, que contiene `manifest.json` y `src\server.mjs`:
 
 ```powershell
-Set-Location <ruta-de-la-preliminar>
-node src/server.mjs
+Test-Path .\manifest.json
+Test-Path .\src\server.mjs
+node .\src\server.mjs
 ```
 
-El servicio escucha en `127.0.0.1:3176` y crea `.data-independent` en ese directorio. No reutiliza los volúmenes Docker de OGAMEKA. Mantén esa carpeta en una ubicación privada y local. Desde el repositorio completo de desarrollo, el directorio equivalente es `<ruta-del-repositorio>\independent`.
+Los dos comandos `Test-Path` deben devolver `True`. Deja abierta la ventana: Node debe mostrar `OGMK manual preliminary: http://127.0.0.1:3176`. Si el proceso se detiene o falla al iniciar, la URL rechazará la conexión. El servicio escucha en `127.0.0.1:3176` y crea `.data-independent` en ese directorio. No reutiliza los volúmenes Docker de OGAMEKA. Mantén esa carpeta en una ubicación privada y local. Desde el repositorio completo de desarrollo, usa su carpeta `independent`.
 
 ### Emparejar y probar la demo
 
-Abre <http://127.0.0.1:3176>. En otra ventana de PowerShell, lee el código de un solo uso:
+Con el servicio aún ejecutándose, abre <http://127.0.0.1:3176>. En otra ventana de PowerShell, situada en la misma raíz, lee el código de un solo uso:
 
 ```powershell
-Set-Location <ruta-de-la-preliminar>
-Get-Content .data-independent\pair-code.txt
+Get-Content .\.data-independent\pair-code.txt
 ```
 
 Introdúcelo en la página y pulsa **Emparejar**. Caduca a los cinco minutos y se elimina al emparejar; la sesión dura una hora. No compartas el código. Pulsa **Cargar demostración sintética**, confirma que la cuenta aparece como `synthetic / demo`, selecciona el periodo y el modo de ejecución, y pulsa **Analizar hipótesis**.
