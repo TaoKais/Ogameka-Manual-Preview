@@ -1,0 +1,158 @@
+{
+  "format": 1,
+  "edition": "manual-preview",
+  "version": "0.1.0",
+  "license": "Apache-2.0 (scope defined by LICENSE-SCOPE.md)",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 32,
+      "sha256": "23302dd90b8bb74b44d365fafef8df20f809b61cb347023951ecf60a88a29651"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 45,
+      "sha256": "6eee6e03ed5dfbc901dc99ddbfabe296e83a6143dfe6f6a91f47b3b54354a0e1"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8967,
+      "sha256": "c2a907f270b389a87033692f7914a3b6669fc59339d4f8b093a1dbec327f1bf7"
+    },
+    {
+      "path": "HOWTO.md",
+      "bytes": 6342,
+      "sha256": "32c838686a1426c3d35201cb58bb462c65598c0e0cc79bb172883e8e83e10711"
+    },
+    {
+      "path": "ABOUT.md",
+      "bytes": 925,
+      "sha256": "f27e8148bf27ff6acc12e1eac20cd0d908d751d9aeda7214ce7405de593b2078"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "bytes": 5751,
+      "sha256": "dfa89442f656735df532e82f19e34c95ffef8d6082c84613cc0392d74140b969"
+    },
+    {
+      "path": "CONTRACT.md",
+      "bytes": 5396,
+      "sha256": "ed5d1a2dae98f3336fe83f9ba365425a7fae99a432ec9c849ed7c86af18de4ae"
+    },
+    {
+      "path": "PRIVACY.md",
+      "bytes": 2556,
+      "sha256": "ebb5886ad3c6b6ff873d2239bfcda62573365e94bada677f7c8081bd845920a5"
+    },
+    {
+      "path": "MIGRATION.md",
+      "bytes": 2898,
+      "sha256": "7c206ec8a811d69aa527a1305fca7ab0987206d7f13a4ce2439bb49764a8f2db"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "LICENSE-SCOPE.md",
+      "bytes": 1284,
+      "sha256": "6273f22531b97b2115ed3d9eb53d5bc1de1696d236d6c60ba33a0542a5adb396"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 882,
+      "sha256": "11943be54b577d6ee43119a18bfab0a41571b94a63bbc040e7124878593738f5"
+    },
+    {
+      "path": "public/index.html",
+      "bytes": 4719,
+      "sha256": "f79112c3a399eaec5d28c41724b752605793e129ef0dde232034cf4b97030967"
+    },
+    {
+      "path": "public/app.js",
+      "bytes": 5985,
+      "sha256": "914f37257ff738c6a8daeed559110ccf2f5f75f8524c5927d18807c5686b049f"
+    },
+    {
+      "path": "public/style.css",
+      "bytes": 2835,
+      "sha256": "a77cf3339d5711fb3dafd720a0d8fe6249eb1fdc2189a4d11203d09922350af1"
+    },
+    {
+      "path": "public/screenshots/overview.png",
+      "bytes": 102439,
+      "sha256": "015f9d649455a4da4ebeb4150212ad9606449900ea624e8c9d7c53f1de1cb31b"
+    },
+    {
+      "path": "public/screenshots/privacy-and-retention.png",
+      "bytes": 62699,
+      "sha256": "fbbb797283c1ae76b0fcc2a6839406dac7741e81e3976c3b5f8766d14c58c2dc"
+    },
+    {
+      "path": "src/archive.mjs",
+      "bytes": 1788,
+      "sha256": "04e7a38000bcbe2b465e8470bc5768e861a88f056a2b8bd99dad3fd43adf3348"
+    },
+    {
+      "path": "src/contract.mjs",
+      "bytes": 9808,
+      "sha256": "e5850987958b493f79a1be32ad37acbbd699dd24b5b6ca4617ed7b9f8b88bd96"
+    },
+    {
+      "path": "src/demo.mjs",
+      "bytes": 1178,
+      "sha256": "64ece0c63e304d6225b5ced2e033a2a29c72d7c8020f315c5af02cc9158c566e"
+    },
+    {
+      "path": "src/engine.mjs",
+      "bytes": 5207,
+      "sha256": "0b6b1849ac4a8de825e9e93bcb9639aa0b02b63d7cd613ebf6f9885aa297697d"
+    },
+    {
+      "path": "src/pool.mjs",
+      "bytes": 2013,
+      "sha256": "3ea6842d5db5485cf0b1a08c4230f4ea9f60d86376927066d00aee455b5bae1e"
+    },
+    {
+      "path": "src/privacy.mjs",
+      "bytes": 522,
+      "sha256": "7afb7b242e8183d8e8f1881dd9cf86b850c6b9685d9407430aa12581f455647a"
+    },
+    {
+      "path": "src/server.mjs",
+      "bytes": 8884,
+      "sha256": "f2096d190716794c828edd3e3f0963ebfd4cc67bb32085f6c4d661ba80eff2bb"
+    },
+    {
+      "path": "src/store.mjs",
+      "bytes": 7065,
+      "sha256": "c28827db0a9ef35c7940b83ab391ef414a51e43666ccdfc42e99ad41c8317bc0"
+    },
+    {
+      "path": "src/worker.mjs",
+      "bytes": 295,
+      "sha256": "e68eb83cf7a8f90568a941d237c11a3adb720e340c7c63bcdfb3646406065976"
+    },
+    {
+      "path": "test/preview.test.mjs",
+      "bytes": 2430,
+      "sha256": "5a13f52d1b246fd8499328cb349f00276df2ead415ca5e982d1f18fbd04656d6"
+    },
+    {
+      "path": "package.json",
+      "bytes": 273,
+      "sha256": "b67eb1d78ae7e0f79c309747f520a9e0e101f7adfc507554110d0b9a86581874"
+    }
+  ],
+  "excluded": [
+    "browser extension",
+    "OGame capture bridge",
+    "Docker/Grafana deployment",
+    "historic integrated application",
+    "OGame/Gameforge catalogues and artwork",
+    "runtime dependencies",
+    "account data",
+    "secrets"
+  ]
+}

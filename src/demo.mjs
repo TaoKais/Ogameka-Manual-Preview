@@ -1,0 +1,5 @@
+export function demo(count=4,now=new Date().toISOString()){
+  const f=value=>({value,quality:'observed',observedAt:now,source:'synthetic'});
+  return {schema:'ogmk.capture/1',account:{universe:'synthetic',player:'demo'},observedAt:now,bodies:Array.from({length:count},(_,i)=>({id:'planet-'+i,name:'Planeta sintético '+(i+1),kind:'planet',stock:{metal:f(100000),crystal:f(60000),deuterium:f(20000)},production:{metal:f(1000+i*100),crystal:f(600+i*50),deuterium:f(250+i*20)},temperature:f(20-i*5),energy:f(500),settings:Object.fromEntries(['metalPercent','crystalPercent','deuteriumPercent','solarPercent','fusionPercent','crawlerPercent'].map(k=>[k,f(k==='crawlerPercent'?30:100)])),bonuses:{metal:f(1.2),crystal:f(1.2),deuterium:f(1.2)},levels:{1:f(20),2:f(18),3:f(16)},lifeformBuildings:{11101:f(10)},lifeformResearch:{11201:f(3)}}))};
+}
+export function demoPlan(snapshot){return {account:snapshot.account,goals:snapshot.bodies.filter(b=>b.kind==='planet').map((b,i)=>({id:'upgrade-'+i,bodyId:b.id,cost:{metal:50000,crystal:25000,deuterium:5000},gain:{metal:150,crystal:90,deuterium:25},durationHours:6+i})),horizonHours:720,intervalHours:6,parallel:true,weights:[1,1.5,3]};}
