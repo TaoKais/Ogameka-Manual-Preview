@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>OGAMEKA Capture Preview</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header><span class="mark">O</span><span><strong>OGMK</strong><small>CAPTURA LOCAL</small></span><span class="version">0.2.0</span></header>
+    <p class="eyebrow">CAPTURA EXPLÍCITA · SOLO LECTURA</p>
+    <h1>Lee la página que tienes abierta.</h1>
+    <p class="intro">La extensión solo lee datos económicos visibles cuando pulsas el botón. No navega, no consulta APIs del juego y no transmite datos.</p>
+    <div class="notice"><strong>Estado de tolerancia:</strong> esta extensión no ha sido revisada ni declarada tolerada por Origin. No la uses en una cuenta activa hasta recibir esa aprobación.</div>
+    <button id="capture" type="button">Capturar página actual <span>→</span></button>
+    <p id="status" role="status" aria-live="polite">Esperando acción manual.</p>
+    <section id="result" hidden>
+      <div class="result-head"><h2>JSON observado</h2><button id="select" type="button" class="secondary">Seleccionar</button></div>
+      <textarea id="payload" spellcheck="false" aria-label="Captura JSON para copiar"></textarea>
+      <p id="counts"></p>
+      <p>Pega este JSON en Datos y privacidad → Captura manual revisada en el planificador local. Los campos ausentes seguirán ausentes.</p>
+    </section>
+    <footer><span>Sin almacenamiento de extensión · Sin tráfico de red</span><a href="http://127.0.0.1:3176" target="_blank" rel="noopener noreferrer">Abrir planificador local ↗</a></footer>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

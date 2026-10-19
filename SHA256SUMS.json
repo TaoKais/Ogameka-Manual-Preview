@@ -1,7 +1,7 @@
 {
   "format": 1,
   "edition": "manual-preview",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "Apache-2.0 (scope defined by LICENSE-SCOPE.md)",
   "files": [
     {
@@ -15,19 +15,9 @@
       "sha256": "6eee6e03ed5dfbc901dc99ddbfabe296e83a6143dfe6f6a91f47b3b54354a0e1"
     },
     {
-      "path": "README.md",
-      "bytes": 9304,
-      "sha256": "e960a40c47d802eba97a02021b16f3ff57897120238ab3f3ed0cf9f45a6b887f"
-    },
-    {
-      "path": "HOWTO.md",
-      "bytes": 6690,
-      "sha256": "5bd674062b59847a970df390d9d416b6a462b5488ec57e042c80490bce4e43af"
-    },
-    {
       "path": "ABOUT.md",
-      "bytes": 925,
-      "sha256": "f27e8148bf27ff6acc12e1eac20cd0d908d751d9aeda7214ce7405de593b2078"
+      "bytes": 903,
+      "sha256": "d5bed6e5519f1bf84dbab701d1152bde0468190b6528bc06545cf9d12dfc445a"
     },
     {
       "path": "ARCHITECTURE.md",
@@ -35,19 +25,19 @@
       "sha256": "dfa89442f656735df532e82f19e34c95ffef8d6082c84613cc0392d74140b969"
     },
     {
+      "path": "CAPTURE-DESIGN.md",
+      "bytes": 3135,
+      "sha256": "274a2eb82aae1cdcc5eacb8365a5ffdc4c5401d7cff645dfae8575de53dce030"
+    },
+    {
       "path": "CONTRACT.md",
       "bytes": 5396,
       "sha256": "ed5d1a2dae98f3336fe83f9ba365425a7fae99a432ec9c849ed7c86af18de4ae"
     },
     {
-      "path": "PRIVACY.md",
-      "bytes": 2556,
-      "sha256": "ebb5886ad3c6b6ff873d2239bfcda62573365e94bada677f7c8081bd845920a5"
-    },
-    {
-      "path": "MIGRATION.md",
-      "bytes": 2898,
-      "sha256": "7c206ec8a811d69aa527a1305fca7ab0987206d7f13a4ce2439bb49764a8f2db"
+      "path": "HOWTO.md",
+      "bytes": 7515,
+      "sha256": "3fd48f279a8122199d4db1be0862e84d4ba83624d2a57e249d2cf2ca0a5ce4bd"
     },
     {
       "path": "LICENSE",
@@ -56,18 +46,58 @@
     },
     {
       "path": "LICENSE-SCOPE.md",
-      "bytes": 1284,
-      "sha256": "a18d4fe43368ab4cc6c958cb790d0bbb9e85d5cba5ab26061cf38da75cffa95d"
+      "bytes": 1318,
+      "sha256": "5f6fa10d74b0ae40b19d2f75ffef3de6f1c5ede12dbb0a06597da8fa53ab2dc3"
+    },
+    {
+      "path": "MIGRATION.md",
+      "bytes": 2898,
+      "sha256": "7c206ec8a811d69aa527a1305fca7ab0987206d7f13a4ce2439bb49764a8f2db"
     },
     {
       "path": "NOTICE.md",
-      "bytes": 882,
-      "sha256": "30aedfe9998e8656e5bf4c4e313a20a41f8d26141d7434add9335d1102eec31d"
+      "bytes": 898,
+      "sha256": "1f6cc8cb1084f2a62d847737e0ba4269a468319847bce548c8bbb039f85f1691"
     },
     {
-      "path": "public/index.html",
-      "bytes": 11498,
-      "sha256": "7dbc9cf1a6c2a8a091932f2835fc17a40cacf8a843f0ec13a66eca040555ede1"
+      "path": "PRIVACY.md",
+      "bytes": 3564,
+      "sha256": "f9ac1f0667fdd15c6ed850a46fee044ee45ea11f6fca629cf628461ca9633700"
+    },
+    {
+      "path": "README.md",
+      "bytes": 12271,
+      "sha256": "dc112cf87db7c808a8cc2f6d9efcd627f47c1d5d87f4df76113f3dc0d4f84c0b"
+    },
+    {
+      "path": "extension/capture.js",
+      "bytes": 6023,
+      "sha256": "5a25131298949940b954f80a3fc1acf686a7e65964ab1b6736c24a208b7a2a28"
+    },
+    {
+      "path": "extension/popup.css",
+      "bytes": 2467,
+      "sha256": "56b4e855704ea20bd8822f6244b3623c59592c078ecc6482a1a82a0752372a06"
+    },
+    {
+      "path": "extension/popup.html",
+      "bytes": 1751,
+      "sha256": "ae6076b7126e102eb146fd7a65f5cdc622b19d921b78dbaf3bd3411927487c2f"
+    },
+    {
+      "path": "extension/popup.js",
+      "bytes": 1455,
+      "sha256": "7ea13fda80cca7074f7d49e1a5b2a01db3327dde26192c5efd2abb26767f27aa"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 345,
+      "sha256": "f20521b305dba6a4e4d279891522e5db13519abf6880e41bfd36a761a737ca5f"
+    },
+    {
+      "path": "package.json",
+      "bytes": 273,
+      "sha256": "0c68a9248c15559f521465add233c246bada162541214a8ad6134a5e5406b9d2"
     },
     {
       "path": "public/app.js",
@@ -75,9 +105,9 @@
       "sha256": "c7df36cc8301a7493a341c61c79d95289dc50476b0e03559d500839ddce8edf9"
     },
     {
-      "path": "public/style.css",
-      "bytes": 16579,
-      "sha256": "709ada51f02b29ea52cd17860b089fa0958a1a701b47a3f9a91c9030f6e76a34"
+      "path": "public/index.html",
+      "bytes": 11498,
+      "sha256": "02cd7120ca74bf2c172c42df56db185f11073b73fa207d5d5fc5543341156425"
     },
     {
       "path": "public/screenshots/overview.png",
@@ -88,6 +118,11 @@
       "path": "public/screenshots/privacy-and-retention.png",
       "bytes": 93238,
       "sha256": "b44fe73205cab3172eff00d998aa1e6fa0a3fdcee39ee33470d3bad85bc6a59c"
+    },
+    {
+      "path": "public/style.css",
+      "bytes": 16579,
+      "sha256": "709ada51f02b29ea52cd17860b089fa0958a1a701b47a3f9a91c9030f6e76a34"
     },
     {
       "path": "src/archive.mjs",
@@ -117,12 +152,12 @@
     {
       "path": "src/privacy.mjs",
       "bytes": 522,
-      "sha256": "024f3e7c966a5201aa4dc906226793999b73579c44dd377556e2e39d0a45edd2"
+      "sha256": "0a5ee264527f813142a373b8c4749f7832e3bb1163f3e7a5a9896ab8e5d722d8"
     },
     {
       "path": "src/server.mjs",
       "bytes": 8884,
-      "sha256": "8f0dff94fe42e4806aeed9db65f4dfe0cec6a5ac273a8e775b8cc2a4d4815bda"
+      "sha256": "da6d3d4f1e6edab8c34c2ccc0d3e74e24a3f7e6e549eabd399c66f8bf7e526b3"
     },
     {
       "path": "src/store.mjs",
@@ -135,21 +170,19 @@
       "sha256": "e68eb83cf7a8f90568a941d237c11a3adb720e340c7c63bcdfb3646406065976"
     },
     {
+      "path": "test/extension.test.mjs",
+      "bytes": 2974,
+      "sha256": "6de46466e0188f7e81fe3f287390ccff01372aee81fdb9c51c048c3b2c491c41"
+    },
+    {
       "path": "test/preview.test.mjs",
       "bytes": 2799,
       "sha256": "8f164b4bd99ea40066909b11bfd4f61162a3149e44ab4fe81fd9ae4684eeb819"
-    },
-    {
-      "path": "package.json",
-      "bytes": 273,
-      "sha256": "45f203d35bf02d2c22ff8e089a863f66a9ebfdf2bf98d92f5bcb2121d5032383"
     }
   ],
   "excluded": [
-    "browser extension",
-    "OGame capture bridge",
+    "historic integrated application and capture bridge",
     "Docker/Grafana deployment",
-    "historic integrated application",
     "OGame/Gameforge catalogues and artwork",
     "runtime dependencies",
     "account data",

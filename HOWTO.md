@@ -1,6 +1,6 @@
 # How to run OGAMEKA Manual Preview
 
-This guide uses PowerShell on Windows and the synthetic demo. No OGame login, browser extension, Docker, account export or network access is required.
+This guide uses PowerShell on Windows and the synthetic demo. The local planner can run without an OGame login. The optional browser extension is a separate, user-triggered visible-DOM capture and is **not tolerated by Origin** at this time.
 
 ## 1. Check Node.js
 
@@ -12,7 +12,13 @@ node --version
 
 The manual preview uses only Node.js built-in modules; do not run `npm install` for this edition.
 
-## 2. Start an isolated instance
+## 2. Load the extension package (inspection only)
+
+The repository root contains `manifest.json`. After extracting the GitHub ZIP, that root folder is the unpacked extension folder: in Opera GX open `opera://extensions`, enable Developer mode, choose **Load unpacked**, and select the extracted `Ogameka-Manual-Preview-main` folder. In Chrome use `chrome://extensions` and the equivalent **Load unpacked** action.
+
+Origin's current rule says installed extensions running on an OGame tab must be on the official Tolerated Tools list. This preview is not listed. You may inspect the package, but **do not run its capture on a live OGame account unless Origin has listed the exact version**. See [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md).
+
+## 3. Start an isolated instance
 
 In a new PowerShell window:
 
@@ -25,7 +31,7 @@ The service binds to `127.0.0.1:3176`. It uses `.data-independent` under this di
 
 When running from the full development checkout instead of the standalone preview branch/package, use `<path-to-repository>\independent` as the working directory.
 
-## 3. Pair this browser window
+## 4. Pair this browser window
 
 Open <http://127.0.0.1:3176>. In a second PowerShell window, read the one-time code:
 
@@ -36,7 +42,7 @@ Get-Content .data-independent\pair-code.txt
 
 Enter the code in the page and select **Emparejar**. The code expires after five minutes and is removed after pairing. Keep it private. The local session expires after one hour.
 
-## 4. Explore the synthetic scenario
+## 5. Explore the synthetic scenario
 
 Select **Cargar demostración sintética**. Confirm that the account is marked `synthetic / demo` and the bodies are named `Planeta sintético`. Choose a horizon, execution mode and sampling interval, then select **Analizar hipótesis**. Values in the demo are illustrative only.
 
@@ -44,19 +50,19 @@ The displayed projection depends on entered prices, durations, production gains,
 
 The planet overview starts with a doughnut chart that assigns one sector to each planet and a histogram that groups planet production into value ranges. Use the **Resource** selector to compare metal, crystal and deuterium. The demo chart is intentionally synthetic; it is useful for exploring the interface, not as a prediction of a real empire.
 
-## 5. Import your own reviewed economic data (optional)
+## 6. Import your own reviewed economic data (optional)
 
 Open **Datos y privacidad** and paste a JSON document that follows [`CONTRACT.md`](CONTRACT.md). Choose **Validar y guardar**. The contract rejects unsupported fields and invalid or oversized inputs. Do not include login/session data, messages, fleet details, espionage reports or information about another player. Review every value and its observation date before planning.
 
 Imported data is not independently verified against OGame. Missing or stale critical values should remain missing; do not replace them with guessed zeros.
 
-## 6. Retention, export and deletion
+## 7. Retention, export and deletion
 
 The privacy page lets you prune history and export a minimized support diagnostic. The diagnostic omits names, original identifiers, coordinates, quantities, levels and dates; it is still a file you control and should review before sharing.
 
 The deletion control removes only this preview instance's store, backup and local pairing state. It does not erase browser-extension data, files you exported, system backups or existing Docker volumes. Confirm the exact scope shown in the UI before deletion.
 
-## 7. Stop the service
+## 8. Stop the service
 
 Return to the PowerShell window running Node and press `Ctrl+C`. The instance stops; its local data remains in `.data-independent` until you delete it yourself or use the scoped deletion control.
 

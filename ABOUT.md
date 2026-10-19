@@ -2,9 +2,9 @@
 
 GitHub About panel text prepared for this preview:
 
-**Description:** Local-first OGame empire planning. Manual preview branch uses synthetic or user-entered data; no gameplay automation, game polling or telemetry.
+**Description:** Local-first OGame planning with one-click visible-DOM capture, manual import and synthetic demo. The capture extension is not yet tolerated by Origin.
 
-**Descripción (español):** Prototipo local de planificación económica para OGame con datos manuales o sintéticos. Sin automatización del juego, consultas a OGame, telemetría ni servicio central de cuentas.
+**Descripción (español):** Planificación local de OGame con captura DOM tras clic, importación manual y demo sintética. La extensión de captura aún no está tolerada por Origin.
 
 **Topics:** `ogame`, `planning-tool`, `local-first`, `privacy`, `nodejs`, `strategy-game`
 
