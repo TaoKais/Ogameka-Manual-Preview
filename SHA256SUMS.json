@@ -51,8 +51,8 @@
     },
     {
       "path": "HOWTO.md",
-      "bytes": 4945,
-      "sha256": "01e583c4b73111f35793af82a00e88303e3ff4b534ee05588194997fe07042cf"
+      "bytes": 5868,
+      "sha256": "31950f527d578ce18b30e85507c0819326f9e2b48d820e5536a067ee7c195be9"
     },
     {
       "path": "LICENSE",
@@ -91,23 +91,33 @@
     },
     {
       "path": "public/app.js",
-      "bytes": 15100,
-      "sha256": "5e762b1429a43487f781b3b52ffa450413018410c45a9b6a2e63c1ec206bce91"
+      "bytes": 23173,
+      "sha256": "5a7347626d7389a09c8ee69f05b3e587adf3104c7d44b0a24b1ea7549f288908"
     },
     {
       "path": "public/index.html",
-      "bytes": 12548,
-      "sha256": "97adfc92972f7906443e3d948589b67c658b133cab04ef900478262412c447aa"
+      "bytes": 14817,
+      "sha256": "cfd7a6f70a6d16869a28997894fc70ce2a9ce57c510e4d4463d16adb7e1fa724"
+    },
+    {
+      "path": "public/screenshots/life-in-empire.png",
+      "bytes": 334368,
+      "sha256": "cc167f34ac7bbd032c190b77dfa61a6ee61a4f3bae21ddc500f2d2a725ca25b2"
     },
     {
       "path": "public/screenshots/overview.png",
-      "bytes": 850681,
-      "sha256": "df02cb63a478be7669da65022c49b13ccd86c4d33cec352e903ae03febf5596c"
+      "bytes": 512430,
+      "sha256": "6c6c17c8a135131ca549abee19fe8ca7c394bb9ba370226e88d68bb2bcbb606a"
+    },
+    {
+      "path": "public/screenshots/planning-matrix.png",
+      "bytes": 335449,
+      "sha256": "452b0f85fd2e3200f8d64f2e6727e4853b6ce85edb68276b9594d5e0f4c965f6"
     },
     {
       "path": "public/screenshots/privacy-and-retention.png",
-      "bytes": 450412,
-      "sha256": "09ce4838fa58ab00d7efcc84e4a8bb843531aaa0d0def389c5e01c181962e9d5"
+      "bytes": 362171,
+      "sha256": "b54041cb3eb4a14d3eca53f37ae844b5b9274e72aaf59c72b70f0fd5a148fe68"
     },
     {
       "path": "public/style.css",
@@ -116,13 +126,13 @@
     },
     {
       "path": "public/tansei.css",
-      "bytes": 4980,
-      "sha256": "8825529d96fa8a44771833cedd0a94704fa4608bcf61614d3c782c68b41e5cab"
+      "bytes": 7818,
+      "sha256": "20114a83aad65d9a9a7f1bb249e118941e926c71431c668baa5d61762bba1639"
     },
     {
       "path": "README.md",
-      "bytes": 9993,
-      "sha256": "a28b3f56f09658fe7a9ee4439d5b1d3785b0c5ece7d98b478642c6f45458f226"
+      "bytes": 10841,
+      "sha256": "bc76edb0f5f933305ea2c421dba72f2f83a0c331e356cf5f0090975fb14de162"
     },
     {
       "path": "scripts/build-checksums.mjs",

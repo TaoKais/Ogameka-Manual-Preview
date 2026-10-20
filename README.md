@@ -1,4 +1,4 @@
-# OGAMEKA Local Planner
+﻿# OGAMEKA Local Planner
 
 **A local-first OGame economy viewer and scenario planner.** The browser extension reads selected values from the page you opened after an explicit click, then sends the validated capture to the planner running on your computer.
 
@@ -14,11 +14,17 @@ Screenshots use the built-in synthetic scenario. They contain no player or accou
 
 ![OGAMEKA TANSEI-inspired Model and Data page, with local extension pairing, retention and deletion controls](public/screenshots/privacy-and-retention.png)
 
+![Life in the Empire view with per-planet lifeform building and research levels from synthetic data](public/screenshots/life-in-empire.png)
+
+![Multi-planet planning matrix comparing separate destination amortization routes](public/screenshots/planning-matrix.png)
+
 ## English
 
 ### What it does
 
-- Shows production shares and frequency histograms across multiple planets.
+- Shows production shares, histograms, and a per-planet production table across multiple planets.
+- Includes dedicated Empire, Life in the Empire, Planning, Projection, Fleet boundary, and Model and Data views.
+- The planning matrix can compare a manually defined objective on selected planets as separate conditional amortization routes, or add those routes to a scenario.
 - Compares small, user-defined economic scenarios over 1, 3 or 6 months and displays conditional projections and event timelines.
 - Includes a Manifest V3 browser extension with an explicit, one-click visible-page capture.
 - Sends a capture only to the local planner at `127.0.0.1:3176`, after one-time pairing and the user's click. The extension credential can upload captures; it cannot read the planner's accounts or history.
@@ -67,7 +73,9 @@ Optional support: [Ko-fi · Yahvveh](https://ko-fi.com/yahvveh). Donations do no
 
 ### Qué ofrece
 
-- Compara la producción de varios planetas con sectores e histogramas.
+- Compara la producción de varios planetas con sectores, histogramas y tabla planetaria.
+- Incluye vistas separadas de Imperio, Vida en el Imperio, Planificación, Proyección, límite de Flota y Modelo y datos.
+- La matriz compara una mejora definida manualmente en varios planetas como rutas de amortización condicionales o las añade al escenario.
 - Explora escenarios económicos definidos por el usuario en horizontes de 1, 3 o 6 meses, con proyecciones condicionadas y calendario estimado.
 - Incluye una extensión Manifest V3 que consulta los datos visibles de la página actual tras un clic explícito.
 - Envía la captura únicamente al planificador local `127.0.0.1:3176`, después de un emparejamiento de un solo uso y de pulsar **Capturar y sincronizar**. La credencial solo permite subir capturas; no permite leer cuentas ni historial.

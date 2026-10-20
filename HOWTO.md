@@ -1,4 +1,4 @@
-# How to use OGAMEKA Local Planner
+﻿# How to use OGAMEKA Local Planner
 
 This guide covers the local planner, browser extension, one-time pairing, synthetic demo, and local data controls. The extension has not been declared tolerated by Origin. Do not capture a live account unless Origin lists this exact version.
 
@@ -49,6 +49,10 @@ The code expires in three minutes. The resulting upload-only credential expires 
 ## 6. Explore without an account
 
 Choose **Cargar demo** to generate ten synthetic planets. Select a resource, horizon, sampling interval, and execution mode, then choose **Analizar hipótesis**. The demo is not a snapshot of OGame. Planning results are conditional on the displayed assumptions and do not establish a global optimum.
+
+In **Planificación**, use **Matriz de objetivos** to enter a manual cost, hourly gain and duration, then select one or more planets. **Comparar amortización** runs one local scenario per selected destination and shows the conditional investment, completion time, payback and horizon advantage. **Añadir objetivo a planetas seleccionados** adds the separate destinations to the scenario JSON; open the advanced JSON editor to inspect or edit it. The comparison uses the loaded snapshot and does not prove a globally optimal route. In **Vida en el Imperio**, lifeform levels appear only when they exist in the capture; IDs are shown as captured instead of guessed labels.
+
+The **Flota** view is an explicit boundary: this edition does not capture espionage reports, fleets or defenses, and therefore does not estimate attack profitability. Grafana is not bundled; the charts are rendered locally by this application.
 
 For a real capture, inspect source, timestamp, quality, missing fields, and production settings before relying on the charts. The adapter may be partial, and the model blocks analysis when critical fields are absent or stale.
 

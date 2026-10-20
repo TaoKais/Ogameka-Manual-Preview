@@ -34,6 +34,47 @@ function renderBodies(){
     details.textContent=facts.join(' · ')||'Sin ajustes observados';row.append(details);rows.append(row);
   }
 }
+function renderLifeforms(){
+  const rows=$('lifeforms-body');if(!rows)return;rows.replaceChildren();let count=0;
+  for(const body of selected()?.latest.bodies||[]){
+    const buildings=body.lifeformBuildings||{},research=body.lifeformResearch||{};
+    const entries=[['Edificios',buildings],['Tecnologías',research]];
+    if(!Object.keys(buildings).length&&!Object.keys(research).length)continue;count++;
+    const row=document.createElement('tr'),name=document.createElement('td'),kind=document.createElement('td');
+    name.textContent=body.name||body.id;kind.textContent=body.kind==='moon'?'Luna':'Planeta';row.append(name,kind);
+    for(const [,map]of entries){const cell=document.createElement('td'),list=document.createElement('div');list.className='level-chips';
+      for(const [id,fact]of Object.entries(map)){const chip=document.createElement('span');chip.className='level-chip';chip.textContent=`${id} · ${fact.value??'—'}`;chip.title=`${fact.quality} · ${fact.observedAt}`;list.append(chip);}cell.append(list);row.append(cell);}
+    rows.append(row);
+  }
+  $('lifeforms-empty').hidden=count>0;
+}
+function arrangePages(){
+  const controls=document.querySelector('.controls-panel'),projection=document.querySelector('.projection-panel'),events=document.querySelector('.events-panel');
+  if(controls)$('planning-content').append(controls);
+  if(controls){const goals=$('goals'),label=goals.previousElementSibling,advanced=document.createElement('details'),summary=document.createElement('summary');advanced.className='advanced-goals';summary.textContent='Editar JSON avanzado de objetivos';advanced.append(summary,label,goals);controls.insertBefore(advanced,$('analyze'));}
+  if(projection)$('projection-content').append(projection);
+  if(events)$('projection-content').append(events);
+  const projectionPanel=$('projection-content').querySelector('.projection-panel'),tableHead=projectionPanel?.querySelector('.table-heading'),bodyTable=projectionPanel?.querySelector('.scroll');
+  if(tableHead&&bodyTable){const tablePanel=document.createElement('section');tablePanel.className='panel planet-table-panel';tablePanel.append(tableHead,bodyTable);$('economy').append(tablePanel);}
+  const builder=document.createElement('section');builder.className='panel objective-matrix';builder.innerHTML='<div class="panel-heading"><div><p class="eyebrow">ASIGNACIÓN MULTIPLANETA</p><h2>Matriz de objetivos</h2></div><span class="chart-tag">HIPÓTESIS MANUALES</span></div><p>Define una mejora y asígnala a varios planetas. Compara la amortización como escenarios separados; coste, ganancia y duración son entradas manuales.</p><div class="matrix-form"><label>Identificador<input id="matrix-id" value="upgrade" maxlength="48"></label><label>Coste M / C / D<div class="triple-input"><input id="matrix-metal" type="number" min="0" value="50000"><input id="matrix-crystal" type="number" min="0" value="25000"><input id="matrix-deut" type="number" min="0" value="5000"></div></label><label>Ganancia por hora M / C / D<div class="triple-input"><input id="matrix-gmetal" type="number" min="0" value="150"><input id="matrix-gcrystal" type="number" min="0" value="90"><input id="matrix-gdeut" type="number" min="0" value="25"></div></label><label>Duración (h)<input id="matrix-duration" type="number" min="0.01" step="0.25" value="6"></label></div><div id="matrix-destinations" class="destination-grid"></div><div class="matrix-actions"><button id="matrix-add" class="button-secondary">Añadir objetivo a planetas seleccionados</button><button id="matrix-compare" class="button-secondary">Comparar amortización</button></div><p id="matrix-summary" class="matrix-summary">Elige destinos para construir la matriz.</p><div class="scroll matrix-results" hidden><table><thead><tr><th>Destino</th><th>Inversión equivalente</th><th>Finaliza en</th><th>Amortización</th><th>Ventaja al horizonte</th></tr></thead><tbody id="matrix-results-body"></tbody></table><p>Comparativa condicional. Usa los datos y supuestos visibles; no acredita un óptimo global.</p></div>';
+  $('planning-content').prepend(builder);
+  const destination=$('matrix-destinations');
+  $('matrix-add').addEventListener('click',()=>{
+    const chosen=[...destination.querySelectorAll('input:checked')].map(input=>input.value);if(!chosen.length){status('Selecciona al menos un planeta.',true);return;}
+    let goals;try{goals=JSON.parse($('goals').value||'[]');}catch{status('El JSON de objetivos contiene un error; corrígelo antes de añadir.',true);return;}
+    if(!Array.isArray(goals))throw Error('Los objetivos deben ser una lista JSON.');if(goals.length+chosen.length>60){status('El contrato admite hasta 60 objetivos por escenario.',true);return;}
+    const base=$('matrix-id').value.trim().replace(/[^a-zA-Z0-9_-]/g,'-')||'upgrade',sequence=Date.now().toString(36);
+    for(const [index,bodyId]of chosen.entries())goals.push({id:`${base}-${sequence}-${index+1}`,bodyId,cost:{metal:Number($('matrix-metal').value),crystal:Number($('matrix-crystal').value),deuterium:Number($('matrix-deut').value)},gain:{metal:Number($('matrix-gmetal').value),crystal:Number($('matrix-gcrystal').value),deuterium:Number($('matrix-gdeut').value)},durationHours:Number($('matrix-duration').value)});
+    $('goals').value=JSON.stringify(goals,null,2);$('matrix-summary').textContent=`${chosen.length} rutas añadidas · ${goals.length} objetivos en total. Revisa coste y ganancia antes de analizar.`;status('Rutas añadidas al escenario; no se envía ninguna acción al juego.');
+  });
+  $('matrix-compare').addEventListener('click',async()=>{
+    const chosen=[...destination.querySelectorAll('input:checked')].map(input=>input.value);if(!chosen.length){status('Selecciona al menos un planeta.',true);return;}if(!selected())throw Error('Carga una captura o demo antes de comparar.');
+    const results=$('matrix-results-body'),wrap=document.querySelector('.matrix-results');results.replaceChildren();wrap.hidden=false;const fmt=v=>v==null?'Fuera del horizonte':`${number(v,1)} h`,horizon=Number($('horizon').value);
+    for(const bodyId of chosen){const row=document.createElement('tr'),body=selected().latest.bodies.find(item=>item.id===bodyId);try{const answer=await api('/api/analyze',{account:selected().latest.account,goals:[{id:'compare-'+bodyId,bodyId,cost:{metal:Number($('matrix-metal').value),crystal:Number($('matrix-crystal').value),deuterium:Number($('matrix-deut').value)},gain:{metal:Number($('matrix-gmetal').value),crystal:Number($('matrix-gcrystal').value),deuterium:Number($('matrix-gdeut').value)},durationHours:Number($('matrix-duration').value)}],horizonHours:horizon,intervalHours:Number($('step').value),parallel:true,weights:[1,1.5,3]});const cells=[body?.name||bodyId,answer.status==='blocked'?`Bloqueado · ${answer.issues.length} datos pendientes`:number(answer.investment),answer.status==='blocked'?'—':fmt(answer.completionHours),answer.status==='blocked'?'—':fmt(answer.breakEvenHours),answer.status==='blocked'?'—':number(answer.samples.at(-1)?.advantage||0)];for(const value of cells){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}}catch(error){const cell=document.createElement('td');cell.colSpan=5;cell.textContent=`${body?.name||bodyId} · ${error.message}`;row.append(cell);}results.append(row);}
+    status('Comparación terminada como rutas independientes; revisa los supuestos y la calidad de los datos.');
+  });
+}
+function renderDestinations(){const host=$('matrix-destinations');if(!host)return;host.replaceChildren();for(const body of selected()?.latest.bodies.filter(body=>body.kind==='planet')||[]){const label=document.createElement('label'),input=document.createElement('input'),name=document.createElement('span');input.type='checkbox';input.value=body.id;name.textContent=body.name||body.id;label.append(input,name);host.append(label);}}
 function renderPie(entries,total){
   const slices=$('pie-slices'),legend=$('pie-legend');slices.replaceChildren();legend.replaceChildren();
   if(!entries.length||total<=0){$('pie-center-value').textContent='—';$('pie-center-label').textContent='SIN DATOS';return;}
@@ -76,13 +117,13 @@ function renderPlanetVisuals(){
 async function refresh(){
   state=await api('/api/state');const previous=$('account').value;
   $('account').replaceChildren(...Object.entries(state.accounts).map(([key,entry])=>{const option=document.createElement('option');option.value=key;option.textContent=entry.latest.account.universe+' / '+entry.latest.account.player;return option;}));
-  if(state.accounts[previous])$('account').value=previous;$('days').value=state.retention.days;$('snapshots').value=state.retention.snapshots;$('pairing').hidden=true;$('workspace').hidden=false;renderBodies();renderPlanetVisuals();
+  if(state.accounts[previous])$('account').value=previous;$('days').value=state.retention.days;$('snapshots').value=state.retention.snapshots;$('pairing').hidden=true;$('workspace').hidden=false;renderBodies();renderPlanetVisuals();renderLifeforms();renderDestinations();
 }
-$('account').addEventListener('change',()=>{renderBodies();renderPlanetVisuals();});
+$('account').addEventListener('change',()=>{renderBodies();renderPlanetVisuals();renderLifeforms();renderDestinations();});
 $('chartResource').addEventListener('change',renderPlanetVisuals);
 function action(id,handler){$(id).addEventListener('click',async()=>{const button=$(id);button.disabled=true;try{await handler();}catch(error){status(error.message,true);}finally{button.disabled=false;}});}
 $('pairForm').addEventListener('submit',async event=>{event.preventDefault();try{await api('/api/pair',{code:$('pairCode').value});$('pairCode').value='';await refresh();status('Sesión local emparejada. Ningún dato se envía a OGame.');}catch(error){status(error.message,true);}});
-document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.page').forEach(page=>page.hidden=page.id!==button.dataset.page);document.querySelectorAll('[data-page]').forEach(tab=>tab.classList.toggle('active',tab===button));}));
+document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.page').forEach(page=>page.hidden=page.id!==button.dataset.page);document.querySelectorAll('[data-page]').forEach(tab=>tab.classList.toggle('active',tab.dataset.page===button.dataset.page));document.body.classList.toggle('subview',button.dataset.page!=='economy');}));
 action('demo',async()=>{const result=await api('/api/demo',{});await refresh();$('goals').value=JSON.stringify(result.plan.goals,null,2);status('Demo sintética cargada: '+result.plan.goals.length+' planetas simulados. Ninguna cifra procede de una cuenta real.');});
 action('extensionPairCode',async()=>{const result=await api('/api/extension/pair-code',{});$('extensionCode').textContent='Código temporal: '+result.code+' · caduca en 3 min';$('extensionCode').hidden=false;status('Código creado. Introdúcelo en la extensión y confirma la captura desde la pestaña del juego.');});
 action('revokeExtensions',async()=>{await api('/api/extension/revoke-all',{});$('extensionCode').hidden=true;status('Credenciales de extensión revocadas.');});
@@ -102,4 +143,5 @@ action('analyze',async()=>{
   const curve=makeSvg('path',{d:result.samples.map((sample,index)=>`${index?'L':'M'}${28+sample.hour/horizon*757},${230-(sample.advantage-min)/span*208}`).join(' ')});$('chart').append(curve);
   const last=result.samples.at(-1),end=makeSvg('circle',{cx:28+last.hour/horizon*757,cy:230-(last.advantage-min)/span*208,r:4,fill:'#79e4c1',stroke:'#0e1827','stroke-width':2});$('chart').append(end);$('projection-horizon').textContent=`Horizonte · ${horizon/720} ${horizon===720?'mes':'meses'}`;$('limits').textContent=result.assumptions.map(text=>assumptionLabels[text]||text).join(' ');status('Proyección estimada. No demuestra un óptimo global ni valida fórmulas de OGame.');
 });
+arrangePages();
 refresh().catch(()=>{});

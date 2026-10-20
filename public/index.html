@@ -15,7 +15,11 @@
     <p class="tansei-nav-label">ESPACIO LOCAL</p>
     <nav class="tansei-nav" aria-label="Secciones">
       <button class="tansei-nav-link active" data-page="economy"><span class="nav-glyph">◈</span><span>Imperio</span><small>01</small></button>
-      <button class="tansei-nav-link" data-page="data"><span class="nav-glyph">⚙</span><span>Modelo y datos</span><small>02</small></button>
+      <button class="tansei-nav-link" data-page="lifeforms"><span class="nav-glyph">✳</span><span>Vida en el Imperio</span><small>02</small></button>
+      <button class="tansei-nav-link" data-page="planning"><span class="nav-glyph">⌘</span><span>Planificación</span><small>03</small></button>
+      <button class="tansei-nav-link" data-page="projection"><span class="nav-glyph">⌁</span><span>Proyección</span><small>04</small></button>
+      <button class="tansei-nav-link" data-page="fleet"><span class="nav-glyph">◇</span><span>Flota</span><small>05</small></button>
+      <button class="tansei-nav-link" data-page="data"><span class="nav-glyph">⚙</span><span>Modelo y datos</span><small>06</small></button>
     </nav>
     <div class="tansei-side-bottom"><span class="tansei-live-dot"></span>LOCAL · PRIVADO<small>Planifica. Compara. Decide.</small></div>
   </aside>
@@ -56,9 +60,7 @@
 
     <main id="workspace" hidden>
       <nav class="tabs" aria-label="Secciones">
-        <button class="tab active" data-page="economy"><span>01</span> Cartografía</button>
-        <button class="tab" data-page="data"><span>02</span> Datos y privacidad</button>
-        <span class="tabs-note">Sin acciones, alarmas ni peticiones al juego</span>
+        <span class="tabs-note">Navegación local · datos de la captura seleccionada</span>
       </nav>
 
       <section id="economy" class="page">
@@ -126,6 +128,16 @@
       <section id="data" class="page data-page" hidden>
         <section class="panel"><div class="panel-heading"><div><p class="eyebrow">PUENTE LOCAL EXPLÍCITO</p><h2>Conectar extensión</h2></div><span class="chart-tag">SOLO ESCRITURA</span></div><p>Genera un código de un solo uso. Escríbelo en la extensión para permitir envíos directos a este planificador. Caduca en tres minutos; la credencial solo puede guardar capturas, no leer datos.</p><button id="extensionPairCode" class="button-primary">Generar código temporal <span>→</span></button><p id="extensionCode" class="pair-code" hidden></p><button id="revokeExtensions" class="button-secondary">Revocar todas las extensiones emparejadas</button><p>Los datos se quedan en 127.0.0.1. La captura requiere un clic explícito; no hay consultas automáticas ni envíos a terceros.</p></section>
         <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CICLO DE VIDA LOCAL</p><h2>Retención y borrado</h2></div></div><div class="controls-grid"><label>Días de historial<input id="days" type="number" min="1" max="365" value="30"></label><label>Capturas por cuenta<input id="snapshots" type="number" min="1" max="120" value="120"></label></div><button id="retention" class="button-secondary">Aplicar retención</button><button id="support" class="button-secondary">Exportar diagnóstico anónimo</button><p>El diagnóstico solo contiene recuentos y calidades. Omite nombres, identificadores originales, coordenadas, cantidades, niveles y fechas.</p><div class="danger-zone"><p class="eyebrow">BORRADO ACOTADO</p><h3>Eliminar datos de esta instancia</h3><p>Elimina cuentas, historial, copias locales, sesión y credenciales emparejadas. No elimina exportaciones, copias de seguridad del sistema ni otras instalaciones.</p><label>Escribe BORRAR OGAMEKA INDEPENDIENTE<input id="confirmation" autocomplete="off"></label><button id="wipe" class="button-danger">Borrar datos de esta instancia</button></div></section>
+      </section>
+
+      <section id="lifeforms" class="page" hidden>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">DESARROLLO PLANETARIO</p><h2>Vida en el Imperio</h2></div><span class="chart-tag">SOLO NIVELES OBSERVADOS</span></div><p>Edificios y tecnologías de formas de vida disponibles en la captura seleccionada. Los identificadores se muestran tal como llegan; no se inventan nombres ni niveles ausentes.</p><div class="scroll lifeform-scroll"><table><thead><tr><th>Planeta</th><th>Tipo</th><th>Edificios de formas de vida</th><th>Tecnologías de formas de vida</th></tr></thead><tbody id="lifeforms-body"></tbody></table></div><p id="lifeforms-empty" class="muted-copy">Sin niveles de formas de vida observados en esta captura.</p></section>
+      </section>
+
+      <section id="planning" class="page" hidden><div id="planning-content"></div></section>
+      <section id="projection" class="page" hidden><div id="projection-content"></div></section>
+      <section id="fleet" class="page" hidden>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">MÓDULO EN PREPARACIÓN</p><h2>Flota y objetivos</h2></div><span class="chart-tag">SIN DATOS DE ESPIONAJE</span></div><p>Esta edición independiente no captura informes de espionaje, flotas ni defensas. Por eso no calcula rentabilidad de ataques ni recomienda objetivos a partir de datos inventados. El módulo queda reservado para una fuente de datos autorizada y una revisión de tolerancia; no realiza consultas al juego.</p><div class="fleet-boundary"><span>01</span><div><b>Comparación segura</b><small>Requiere informes introducidos por el usuario y reglas de juego verificadas.</small></div><span>02</span><div><b>Estimación de vuelo</b><small>Sin envío de flotas, alarmas ni actividad automática.</small></div></div></section>
       </section>
     </main>
 
