@@ -10,9 +10,9 @@
 
 Screenshots use the built-in synthetic scenario. They contain no player or account data.
 
-![OGAMEKA production overview with per-planet sectors, a histogram, planner controls and a conditional projection](public/screenshots/overview.png)
+![OGAMEKA local planner in its TANSEI-inspired layout, showing the sidebar, planet production sectors, histogram and scenario controls with synthetic data](public/screenshots/overview.png)
 
-![OGAMEKA local capture connection, retention and deletion controls](public/screenshots/privacy-and-retention.png)
+![OGAMEKA TANSEI-inspired Model and Data page, with local extension pairing, retention and deletion controls](public/screenshots/privacy-and-retention.png)
 
 ## English
 

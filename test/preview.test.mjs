@@ -26,6 +26,17 @@ test('the synthetic demo provides ten varied planets for the multi-planet charts
   assert.ok(new Set(metals).size>1);
 });
 
+test('the local server serves the TANSEI navigation layer used by the real dashboard',async t=>{
+  const app=await setup(t),html=await (await fetch(app.url)).text();
+  assert.match(html,/href="\/tansei\.css"/);
+  assert.match(html,/class="tansei-sidebar"/);
+  assert.match(html,/data-page="economy"/);
+  const style=await fetch(app.url+'/tansei.css');
+  assert.equal(style.status,200);
+  assert.match(style.headers.get('content-type'),/text\/css/);
+  assert.match(await style.text(),/\.tansei-sidebar/);
+});
+
 test('OGAMEKA planner pairs locally and calculates the synthetic scenario',async t=>{
   const app=await setup(t),page=await fetch(app.url),html=await page.text();
   assert.equal(page.status,200);

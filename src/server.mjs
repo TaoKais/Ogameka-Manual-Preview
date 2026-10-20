@@ -34,7 +34,7 @@ export async function createApp({dir,port=0,workerTimeout=LIMITS.workerMs,onPair
         res.writeHead(204,{'Access-Control-Allow-Origin':from,'Access-Control-Allow-Methods':'POST, DELETE','Access-Control-Allow-Headers':'Authorization, Content-Type, X-OGMK-Intent','Access-Control-Max-Age':'300','Vary':'Origin'});return res.end();
       }
       if(req.method==='GET'&&req.url==='/health')return send(res,200,{ok:true,version:'0.3.0'});
-      const statics={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/style.css':['style.css','text/css']};
+      const statics={'/':['index.html','text/html'],'/app.js':['app.js','text/javascript'],'/style.css':['style.css','text/css'],'/tansei.css':['tansei.css','text/css']};
       if(req.method==='GET'&&statics[req.url]){const [name,type]=statics[req.url];res.writeHead(200,{'Content-Type':type+'; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'",'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'});res.end(await fs.readFile(path.join(publicDir,name)));return;}
       if(req.method!=='GET'&&req.headers['x-ogmk-intent']!=='user')throw new InputError('Explicit client intent required',403);
       if(req.method==='POST'&&req.url==='/api/pair'){

@@ -96,18 +96,18 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 11679,
-      "sha256": "53808a30399281ab8387fb9d915d3ba95f7196808ead2eac0dad8976179049f5"
+      "bytes": 12548,
+      "sha256": "97adfc92972f7906443e3d948589b67c658b133cab04ef900478262412c447aa"
     },
     {
       "path": "public/screenshots/overview.png",
-      "bytes": 1256279,
-      "sha256": "14c376076048e298b3aa79659da1818ad7cf65d386805231c0965c56a00f83d6"
+      "bytes": 850681,
+      "sha256": "df02cb63a478be7669da65022c49b13ccd86c4d33cec352e903ae03febf5596c"
     },
     {
       "path": "public/screenshots/privacy-and-retention.png",
-      "bytes": 578502,
-      "sha256": "5b9de2472925e8a6aa57392482cfbff388f5142a69164d1f09b6ac0a8ae1532a"
+      "bytes": 450412,
+      "sha256": "09ce4838fa58ab00d7efcc84e4a8bb843531aaa0d0def389c5e01c181962e9d5"
     },
     {
       "path": "public/style.css",
@@ -115,9 +115,14 @@
       "sha256": "0f8196530fb9490e7bbc987c683fd3d0d0fe026d873cd8b143457679ffb00485"
     },
     {
+      "path": "public/tansei.css",
+      "bytes": 4980,
+      "sha256": "8825529d96fa8a44771833cedd0a94704fa4608bcf61614d3c782c68b41e5cab"
+    },
+    {
       "path": "README.md",
-      "bytes": 9911,
-      "sha256": "f083bc928bb996070414edc68d8cf5914a835d9ef7735cd04df1b77393e58f3d"
+      "bytes": 9993,
+      "sha256": "a28b3f56f09658fe7a9ee4439d5b1d3785b0c5ece7d98b478642c6f45458f226"
     },
     {
       "path": "scripts/build-checksums.mjs",
@@ -156,8 +161,8 @@
     },
     {
       "path": "src/server.mjs",
-      "bytes": 11979,
-      "sha256": "98a2aab54e799fc75858643e7f5ffe8eb71885f14080ee2c32afd7152d118321"
+      "bytes": 12019,
+      "sha256": "4e39b4e61e5e0daa620ef1972581a3e64fd382f008fe233bcdf60a5492e3c84d"
     },
     {
       "path": "src/store.mjs",
@@ -176,8 +181,8 @@
     },
     {
       "path": "test/preview.test.mjs",
-      "bytes": 5282,
-      "sha256": "0baceb3a791b9573bf6b22d46b89ddeca07831735b66d6544fdb6949f21d8ca5"
+      "bytes": 5791,
+      "sha256": "8188b8baf1e01dc16b704474b2ed3a0e3cf38d911c9fdbb1e75bcf350620ff15"
     },
     {
       "path": "test/release.test.mjs",
