@@ -1,9 +1,9 @@
 {
-  "name": "ogameka-manual-preview",
-  "version": "0.2.1",
+  "name": "ogameka-local-planner",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
-  "license": "Apache-2.0",
+  "license": "GPL-3.0-only",
   "engines": {
     "node": ">=24.20.0 <25"
   },

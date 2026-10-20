@@ -15,17 +15,17 @@
     <header class="topbar">
       <a class="brand" href="/" aria-label="OGAMEKA, inicio">
         <span class="brand-mark" aria-hidden="true">O</span>
-        <span class="brand-copy"><strong>OGMK</strong><small>OGAMEKA · MANUAL LAB</small></span>
+        <span class="brand-copy"><strong>OGMK</strong><small>OGAMEKA · LOCAL PLANNER</small></span>
       </a>
       <div class="topbar-right">
         <span class="live-pill"><i></i> LOCAL · SIN TELEMETRÍA</span>
-        <span class="edition-pill">PREVIEW 0.2.1</span>
+        <span class="edition-pill">PREVIEW 0.3.0</span>
       </div>
     </header>
 
     <section class="intro">
       <div>
-        <p class="eyebrow">INTELIGENCIA ECONÓMICA · EDICIÓN MANUAL</p>
+        <p class="eyebrow">VISUALIZACIÓN ECONÓMICA · PLANIFICACIÓN LOCAL</p>
         <h1>Lee el imperio<br><span>planeta a planeta.</span></h1>
         <p class="intro-copy">Una mesa de análisis local para comparar producción, escenarios y horizontes sin consultar el juego.</p>
       </div>
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <div id="status" class="status-banner" role="status"><span class="status-dot"></span>Esta edición no se conecta a OGame. Usa únicamente datos sintéticos o una entrada manual revisada.</div>
+    <div id="status" class="status-banner" role="status"><span class="status-dot"></span>La extensión captura solo al pulsar y sincroniza esta instancia local; el planificador no consulta ni modifica OGame.</div>
 
     <section id="pairing" class="pair-card">
       <div class="pair-icon" aria-hidden="true">⌘</div>
@@ -107,19 +107,19 @@
             <div class="projection-legend"><span><i class="projection-line"></i> Ventaja prevista · unidades equivalentes</span><span id="projection-horizon">A la espera de análisis</span></div>
             <p id="limits" class="assumptions">Los datos ausentes, antiguos o provisionales bloquean el análisis cuando son críticos.</p>
             <div class="table-heading"><h3>Producción del conjunto</h3><span>POR HORA</span></div>
-            <div class="scroll"><table><thead><tr><th>Planeta</th><th>Metal</th><th>Cristal</th><th>Deuterio</th><th>Energía</th></tr></thead><tbody id="bodies"></tbody></table></div>
+            <div class="scroll"><table><thead><tr><th>Planeta</th><th>Metal</th><th>Cristal</th><th>Deuterio</th><th>Energía</th><th>Ajustes y bonus observados</th></tr></thead><tbody id="bodies"></tbody></table></div>
           </section>
         </div>
         <section class="panel events-panel"><div class="table-heading"><div><p class="eyebrow">CALENDARIO</p><h2>Eventos del escenario</h2></div><span>SECUENCIA ESTIMADA</span></div><div class="scroll"><table><thead><tr><th>Fase</th><th>Objetivo</th><th>Planeta</th><th>Hora</th></tr></thead><tbody id="events"></tbody></table></div></section>
       </section>
 
       <section id="data" class="page data-page" hidden>
-        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">ENTRADA DEL USUARIO</p><h2>Importación explícita</h2></div><span class="chart-tag">CONTRATO OGMK / 1</span></div><p>Solo se aceptan datos económicos del contrato <code>ogmk.capture/1</code>. No incluyas sesiones, mensajes, flotas ni informes.</p><label for="capture">Captura manual revisada</label><textarea id="capture" rows="13" spellcheck="false"></textarea><button id="import" class="button-primary">Validar y guardar <span>→</span></button><p>Los datos se almacenan únicamente en el directorio de esta instancia independiente.</p></section>
-        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CICLO DE VIDA LOCAL</p><h2>Retención y borrado</h2></div></div><div class="controls-grid"><label>Días de historial<input id="days" type="number" min="1" max="365" value="30"></label><label>Capturas por cuenta<input id="snapshots" type="number" min="1" max="120" value="120"></label></div><button id="retention" class="button-secondary">Aplicar retención</button><button id="support" class="button-secondary">Exportar diagnóstico anónimo</button><p>El diagnóstico solo contiene recuentos y calidades. Omite nombres, identificadores originales, coordenadas, cantidades, niveles y fechas.</p><div class="danger-zone"><p class="eyebrow">BORRADO ACOTADO</p><h3>Eliminar datos de esta instancia</h3><p>Elimina cuentas, historial y copias locales de este nuevo almacén, y cierra su sesión. No borra la extensión anterior, IndexedDB, archivos exportados ni volúmenes Docker.</p><label>Escribe BORRAR OGAMEKA INDEPENDIENTE<input id="confirmation" autocomplete="off"></label><button id="wipe" class="button-danger">Borrar datos de esta instancia</button></div></section>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">PUENTE LOCAL EXPLÍCITO</p><h2>Conectar extensión</h2></div><span class="chart-tag">SOLO ESCRITURA</span></div><p>Genera un código de un solo uso. Escríbelo en la extensión para permitir envíos directos a este planificador. Caduca en tres minutos; la credencial solo puede guardar capturas, no leer datos.</p><button id="extensionPairCode" class="button-primary">Generar código temporal <span>→</span></button><p id="extensionCode" class="pair-code" hidden></p><button id="revokeExtensions" class="button-secondary">Revocar todas las extensiones emparejadas</button><p>Los datos se quedan en 127.0.0.1. La captura requiere un clic explícito; no hay consultas automáticas ni envíos a terceros.</p></section>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">CICLO DE VIDA LOCAL</p><h2>Retención y borrado</h2></div></div><div class="controls-grid"><label>Días de historial<input id="days" type="number" min="1" max="365" value="30"></label><label>Capturas por cuenta<input id="snapshots" type="number" min="1" max="120" value="120"></label></div><button id="retention" class="button-secondary">Aplicar retención</button><button id="support" class="button-secondary">Exportar diagnóstico anónimo</button><p>El diagnóstico solo contiene recuentos y calidades. Omite nombres, identificadores originales, coordenadas, cantidades, niveles y fechas.</p><div class="danger-zone"><p class="eyebrow">BORRADO ACOTADO</p><h3>Eliminar datos de esta instancia</h3><p>Elimina cuentas, historial, copias locales, sesión y credenciales emparejadas. No elimina exportaciones, copias de seguridad del sistema ni otras instalaciones.</p><label>Escribe BORRAR OGAMEKA INDEPENDIENTE<input id="confirmation" autocomplete="off"></label><button id="wipe" class="button-danger">Borrar datos de esta instancia</button></div></section>
       </section>
     </main>
 
-    <footer><span>PRELIMINAR DE INVESTIGACIÓN · SIN TOLERANCIA NI EXACTITUD CERTIFICADAS · SIN CAPTURA INCLUIDA</span><a href="https://ko-fi.com/yahvveh" target="_blank" rel="noopener noreferrer">Apoyar OGAMEKA · opcional ↗</a></footer>
+    <footer><span>CAPTURA EXPLÍCITA · SIN TOLERANCIA NI EXACTITUD CERTIFICADAS</span><a href="https://ko-fi.com/yahvveh" target="_blank" rel="noopener noreferrer">Apoyar OGAMEKA · opcional ↗</a></footer>
   </div>
 </body>
 </html>

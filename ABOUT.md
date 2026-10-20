@@ -1,15 +1,11 @@
 # GitHub About text
 
-GitHub About panel text prepared for this preview:
+**Description:** Local OGame economy viewer and scenario planner with explicit visible-page capture and loopback-only synchronization. Not declared tolerated by Origin.
 
-**Description:** Local-first OGame planning with one-click visible-DOM capture, manual import and synthetic demo. The capture extension is not yet tolerated by Origin.
+**Descripción:** Visor económico y planificador local de OGame con captura visible explícita y sincronización solo por loopback. Origin no ha declarado tolerada esta versión.
 
-**Descripción (español):** Planificación local de OGame con captura DOM tras clic, importación manual y demo sintética. La extensión de captura aún no está tolerada por Origin.
+**Topics:** `ogame`, `planning-tool`, `browser-extension`, `local-first`, `privacy`, `nodejs`
 
-**Topics:** `ogame`, `planning-tool`, `local-first`, `privacy`, `nodejs`, `strategy-game`
+**Website:** leave empty until an official project page exists.
 
-**Website:** leave empty until an official preview page exists.
-
-The repository's existing visibility and default branch have not been changed. The README carries the preliminary status and tolerance caveat; GitHub's About panel has no separate tagline field.
-
-This text describes the manual preview only. Do not describe the repository as officially approved, endorsed or tolerated.
+Do not describe this release as approved, endorsed, or tolerated by Gameforge or Origin. The repository contains only the independently scoped edition described in [LICENSE-SCOPE.md](LICENSE-SCOPE.md).

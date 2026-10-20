@@ -1,14 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "OGAMEKA Capture Preview",
-  "version": "0.2.1",
-  "description": "User-triggered, local-first capture of visible OGame economy data.",
+  "name": "OGAMEKA Local Planner",
+  "version": "0.3.0",
+  "description": "User-triggered visible capture for a local OGAMEKA planner.",
   "action": {
-    "default_title": "Capture visible OGame data",
+    "default_title": "Capture and sync visible OGame data",
     "default_popup": "extension/popup.html"
   },
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "storage"
+  ],
+  "optional_host_permissions": [
+    "http://127.0.0.1:3176/*"
   ]
 }

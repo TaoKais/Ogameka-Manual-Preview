@@ -1,128 +1,128 @@
 {
   "format": 1,
-  "edition": "manual-preview",
-  "version": "0.2.1",
-  "license": "Apache-2.0 (scope defined by LICENSE-SCOPE.md)",
+  "edition": "ogameka-local-planner",
+  "version": "0.3.0",
+  "license": "GPL-3.0-only (scope defined by LICENSE-SCOPE.md)",
   "files": [
     {
-      "path": ".gitattributes",
-      "bytes": 32,
-      "sha256": "23302dd90b8bb74b44d365fafef8df20f809b61cb347023951ecf60a88a29651"
-    },
-    {
       "path": ".gitignore",
-      "bytes": 45,
-      "sha256": "6eee6e03ed5dfbc901dc99ddbfabe296e83a6143dfe6f6a91f47b3b54354a0e1"
+      "bytes": 60,
+      "sha256": "8eb09d77903c2e3858b91c54fe60f84dbbd58eb6e935206bc5d812bfd13af3ae"
     },
     {
       "path": "ABOUT.md",
-      "bytes": 903,
-      "sha256": "d5bed6e5519f1bf84dbab701d1152bde0468190b6528bc06545cf9d12dfc445a"
+      "bytes": 734,
+      "sha256": "f06611556ad0550e68c49327d24090984d7548de5e33219f9dc9b503bcad4ef1"
     },
     {
       "path": "ARCHITECTURE.md",
-      "bytes": 5751,
-      "sha256": "dfa89442f656735df532e82f19e34c95ffef8d6082c84613cc0392d74140b969"
+      "bytes": 2332,
+      "sha256": "6177479283df3bc2c3bc5688fa64a68fc135975aadbcd5b79c4ef6b644e8b0ef"
     },
     {
       "path": "CAPTURE-DESIGN.md",
-      "bytes": 3135,
-      "sha256": "274a2eb82aae1cdcc5eacb8365a5ffdc4c5401d7cff645dfae8575de53dce030"
+      "bytes": 3282,
+      "sha256": "2bbcd41273fe4abece4b7f6cd4d6516b2133d4e38cd7b2c26f265b11afcbc20e"
     },
     {
       "path": "CONTRACT.md",
-      "bytes": 5396,
-      "sha256": "ed5d1a2dae98f3336fe83f9ba365425a7fae99a432ec9c849ed7c86af18de4ae"
-    },
-    {
-      "path": "HOWTO.md",
-      "bytes": 8273,
-      "sha256": "6f8046c8e22db7503a7416073bd7d68eedb34bff07ab4db3ca3e981103b828b1"
-    },
-    {
-      "path": "LICENSE",
-      "bytes": 11358,
-      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
-    },
-    {
-      "path": "LICENSE-SCOPE.md",
-      "bytes": 1318,
-      "sha256": "e42b754e0cc1234b87ba5168c79311bb425fd0a967108e1d75ff0c83165ec72b"
-    },
-    {
-      "path": "MIGRATION.md",
-      "bytes": 2898,
-      "sha256": "7c206ec8a811d69aa527a1305fca7ab0987206d7f13a4ce2439bb49764a8f2db"
-    },
-    {
-      "path": "NOTICE.md",
-      "bytes": 898,
-      "sha256": "795404c4a126852bcf58c3a908a91da5bbead7526f0cb5648cc029797675f705"
-    },
-    {
-      "path": "PRIVACY.md",
-      "bytes": 3564,
-      "sha256": "f9ac1f0667fdd15c6ed850a46fee044ee45ea11f6fca629cf628461ca9633700"
-    },
-    {
-      "path": "README.md",
-      "bytes": 12895,
-      "sha256": "8d9dbe348c9b379fd625edcdfadb0341cd2f2248712b645992846e33d5bc784a"
+      "bytes": 5506,
+      "sha256": "0aa780950c0f03e1326d208209a32aa400d0d349b516a10ae8bc745c8cbfb31b"
     },
     {
       "path": "extension/capture.js",
-      "bytes": 6023,
-      "sha256": "5a25131298949940b954f80a3fc1acf686a7e65964ab1b6736c24a208b7a2a28"
+      "bytes": 9698,
+      "sha256": "c77310907358e926f556209c734df64189b3e0941e3e7c77c2d9a1f28006319e"
     },
     {
       "path": "extension/popup.css",
-      "bytes": 2467,
-      "sha256": "56b4e855704ea20bd8822f6244b3623c59592c078ecc6482a1a82a0752372a06"
+      "bytes": 2345,
+      "sha256": "68f9d1c22d41baf32b3b58d929c256d7282a433d52dbcbf61ce6d3e74f8b7243"
     },
     {
       "path": "extension/popup.html",
-      "bytes": 1751,
-      "sha256": "c3bea021533e3ad7507a1bf6a2df8cfeccc621e242a9c5c4a7cb4d31d8eb4738"
+      "bytes": 1668,
+      "sha256": "0a2da15c811fbfed8b50bf3689954fd5c998f5e2aafca898a252587933db383f"
     },
     {
       "path": "extension/popup.js",
-      "bytes": 1455,
-      "sha256": "7ea13fda80cca7074f7d49e1a5b2a01db3327dde26192c5efd2abb26767f27aa"
+      "bytes": 3937,
+      "sha256": "5e3bcbf66e52d4405d9cdfcd34f88d4c7b8b3615de725d446a94d605f1efe25e"
+    },
+    {
+      "path": "HOWTO.md",
+      "bytes": 4945,
+      "sha256": "01e583c4b73111f35793af82a00e88303e3ff4b534ee05588194997fe07042cf"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 34674,
+      "sha256": "fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0"
+    },
+    {
+      "path": "LICENSE-SCOPE.md",
+      "bytes": 3098,
+      "sha256": "6ecb1e0defea2d9ce28e3e9455e8c8142bd806830c8ef32ea51de004481c137d"
     },
     {
       "path": "manifest.json",
-      "bytes": 345,
-      "sha256": "8965ad824120b73a39e290e10a928301a2da49cd45b20aff5440b2d30397ae68"
+      "bytes": 428,
+      "sha256": "d81f4656e8a460b584c06eba553537874a68f810291b95f9921e551b40728faf"
+    },
+    {
+      "path": "MIGRATION.md",
+      "bytes": 1415,
+      "sha256": "cad5d649f63d3a6403795de860ed2d837df1a8397da8f932ae9a3dabc2e057f9"
+    },
+    {
+      "path": "NOTICE.md",
+      "bytes": 1177,
+      "sha256": "f331cce295187f0ec113ae1ba72c7b836e37c793f1b13c0a58cd8c68baf6bdbc"
     },
     {
       "path": "package.json",
-      "bytes": 273,
-      "sha256": "4a5ff07bcdcf143c69c2846331b42dff9bbbf65a963e203e263a07535126838c"
+      "bytes": 274,
+      "sha256": "5b5878a07c4a6fd8509c05319b05142db55f53e287ee64983e1e4b99646940d9"
+    },
+    {
+      "path": "PRIVACY.md",
+      "bytes": 3837,
+      "sha256": "94da747ad4dbfa7e9bf9d2a8b41d905ffd403b37c9cd3fb0c40caa085b0aa3cc"
     },
     {
       "path": "public/app.js",
-      "bytes": 14078,
-      "sha256": "c7df36cc8301a7493a341c61c79d95289dc50476b0e03559d500839ddce8edf9"
+      "bytes": 15100,
+      "sha256": "5e762b1429a43487f781b3b52ffa450413018410c45a9b6a2e63c1ec206bce91"
     },
     {
       "path": "public/index.html",
-      "bytes": 11498,
-      "sha256": "8c7e1bdeb14195497faa05e4a6ae2a1107a9060bc1d1a5fd483cc946908714f6"
+      "bytes": 11679,
+      "sha256": "53808a30399281ab8387fb9d915d3ba95f7196808ead2eac0dad8976179049f5"
     },
     {
       "path": "public/screenshots/overview.png",
-      "bytes": 206386,
-      "sha256": "d0cf4c9e040b32f78a0debb6622b490735f3dd6240a354067d1ca23750ea73b3"
+      "bytes": 1256279,
+      "sha256": "14c376076048e298b3aa79659da1818ad7cf65d386805231c0965c56a00f83d6"
     },
     {
       "path": "public/screenshots/privacy-and-retention.png",
-      "bytes": 93238,
-      "sha256": "b44fe73205cab3172eff00d998aa1e6fa0a3fdcee39ee33470d3bad85bc6a59c"
+      "bytes": 578502,
+      "sha256": "5b9de2472925e8a6aa57392482cfbff388f5142a69164d1f09b6ac0a8ae1532a"
     },
     {
       "path": "public/style.css",
-      "bytes": 16579,
-      "sha256": "709ada51f02b29ea52cd17860b089fa0958a1a701b47a3f9a91c9030f6e76a34"
+      "bytes": 16732,
+      "sha256": "0f8196530fb9490e7bbc987c683fd3d0d0fe026d873cd8b143457679ffb00485"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9911,
+      "sha256": "f083bc928bb996070414edc68d8cf5914a835d9ef7735cd04df1b77393e58f3d"
+    },
+    {
+      "path": "scripts/build-checksums.mjs",
+      "bytes": 1770,
+      "sha256": "dcc24de08c98621d3d45dbb6b9b1d932c41f52e0ec4d53268d66f1136bc6832a"
     },
     {
       "path": "src/archive.mjs",
@@ -131,8 +131,8 @@
     },
     {
       "path": "src/contract.mjs",
-      "bytes": 9808,
-      "sha256": "e5850987958b493f79a1be32ad37acbbd699dd24b5b6ca4617ed7b9f8b88bd96"
+      "bytes": 10685,
+      "sha256": "4160c070bd068d08631c2c0c9dfb604eeafd8e6ec448f8943366adff556e0646"
     },
     {
       "path": "src/demo.mjs",
@@ -152,12 +152,12 @@
     {
       "path": "src/privacy.mjs",
       "bytes": 522,
-      "sha256": "592e807bee1263c2f7a6363648f25e3313ff09d53c4119cbe250e32d9470d0ca"
+      "sha256": "153569312fc1b8fdc02b7a0cde09bbb505e772d0e1af5c2052223ac8b53fc491"
     },
     {
       "path": "src/server.mjs",
-      "bytes": 8884,
-      "sha256": "d8e807c0b9cf00e76caf59814dea1c76898bf57fc39cc8936b9d2189b4e9b88f"
+      "bytes": 11979,
+      "sha256": "98a2aab54e799fc75858643e7f5ffe8eb71885f14080ee2c32afd7152d118321"
     },
     {
       "path": "src/store.mjs",
@@ -171,21 +171,24 @@
     },
     {
       "path": "test/extension.test.mjs",
-      "bytes": 2974,
-      "sha256": "6de46466e0188f7e81fe3f287390ccff01372aee81fdb9c51c048c3b2c491c41"
+      "bytes": 5295,
+      "sha256": "7dc950d99add1665a461f6e68e2d1ff016004f2cf58d23c12c80673fff24267e"
     },
     {
       "path": "test/preview.test.mjs",
-      "bytes": 2799,
-      "sha256": "8f164b4bd99ea40066909b11bfd4f61162a3149e44ab4fe81fd9ae4684eeb819"
+      "bytes": 5282,
+      "sha256": "0baceb3a791b9573bf6b22d46b89ddeca07831735b66d6544fdb6949f21d8ca5"
+    },
+    {
+      "path": "test/release.test.mjs",
+      "bytes": 725,
+      "sha256": "3fa3e096663ce84d47b4e34192c626c196d11c3bcdaf9ffac4c5ba3d316ad359"
     }
   ],
   "excluded": [
-    "historic integrated application and capture bridge",
-    "Docker/Grafana deployment",
-    "OGame/Gameforge catalogues and artwork",
+    "historic integrated application and tracker collector",
+    "third-party OGame/Gameforge assets, text and catalogs",
     "runtime dependencies",
-    "account data",
-    "secrets"
+    "account data and secrets"
   ]
 }

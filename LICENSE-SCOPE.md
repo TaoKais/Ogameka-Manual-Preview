@@ -1,9 +1,25 @@
-# License scope
+# License scope and provenance
 
-The Apache License 2.0 in `LICENSE` applies only to the standalone **OGAMEKA Manual Preview 0.2.1** source and documentation distributed in this edition, including its UI, local service, user-triggered capture extension, synthetic demonstration, tests and screenshots created for this preview.
+## Current edition
 
-It does not license the historic integrated application elsewhere in the original repository, the old capture extension or bridge, imported catalogs, OGame/Gameforge text or artwork, trademarks, fonts, Grafana or plugins, or any third-party dependency or contribution not expressly listed in `NOTICE.md`. Those components are excluded from this manual preview package.
+The original code and documentation prepared for **OGAMEKA Local Planner 0.3.0** in this standalone edition are offered under **GNU General Public License v3.0 only**. The grant covers the local planner, its user-triggered Manifest V3 capture adapter, the loopback-only upload bridge, tests, documentation, and screenshots of this interface, to the extent those materials are original contributions whose rights are controlled by the project maintainer.
 
-The repository contains historical material with a separate and unresolved provenance record. Do not infer a license for that material from this directory's `LICENSE`. Do not remove attribution or claim that a technical separation alone resolves legal questions. Before adding external contributions or assets, record the copyright holder, source, license and required notices.
+The license does not grant rights to OGame or Gameforge names, trademarks, game rules, artwork, text, web services, or other third-party material. It does not cover files from the historic combined OGameka/Empire Tracker tree, the old tracker capture service, imported catalogs, Grafana, browser vendors' software, or third-party components not identified as included in `NOTICE.md`.
 
-The project maintainer must ensure that they are authorized to apply this license to the included original contributions. This file records the intended scope; it is not legal advice and it does not grant Gameforge permission or establish Origin tolerance.
+This package was developed after the earlier tracker code had been inspected. It is not described as a formal clean-room development process. A technical rewrite or separate repository does not establish legal independence by itself. No permission from Gameforge, Origin toleration, or legal conclusion is implied.
+
+## Earlier release
+
+The previously published 0.2.1 preview was offered under Apache-2.0. Its already granted terms are not retroactively changed by this release. This 0.3.0 edition is a separately scoped release under GPL-3.0-only. Users must follow the license that accompanied the specific version they received.
+
+## Distribution boundary
+
+The repository's historical combined branch has no global license. Do not add its inherited files or assets to this package under this license. Before any such file is included, record its source, rights holder, license or written permission, notices, and compatibility with the package. If that evidence is missing, keep the material out of the distributed source and archive.
+
+This scope statement documents the intended boundary; it is not legal advice, a transfer of copyright, a Gameforge permission, or an Origin approval. Contributors retain copyright in their contributions and must have authority to submit them under GPL-3.0-only.
+
+GPL-3.0-only was selected for this distributed, locally operated application so that redistributed modified versions remain under reciprocal source-sharing terms. It does not prevent copying, forking, or commercial redistribution by recipients who comply with the license. It grants no trademark rights and does not restrict use of OGame itself.
+
+## License text source
+
+The unmodified GPL-3.0-only text was retrieved from the SPDX License List Data repository on 2026-10-20 using `curl.exe` over verified TLS: <https://raw.githubusercontent.com/spdx/license-list-data/main/text/GPL-3.0-only.txt>. The response was HTTP 200, 34,674 bytes, with SHA-256 `FB981668C18A279E285FC4D83FBA1E836CC84DD4DAA73C9697D3CFD2D8ACA6E0`. A direct fetch from GNU's license site timed out; that failed response was not treated as evidence about the license. The text itself is the GNU license, not a project-authored license.

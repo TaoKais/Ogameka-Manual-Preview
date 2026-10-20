@@ -71,6 +71,32 @@ export function captureVisiblePage(page=document,pageUrl=location.href,observedA
     }
     return result;
   };
+  const observedFact=value=>value===null?null:{value,quality:'observed',source:'visible-dom',observedAt};
+  const gridCells=row=>{const result=[];let index=0;for(const cell of Array.from(row?.cells||[])){result[index]=cell;index+=cell.colSpan||1;}return result;};
+  const readResourceSettings=()=>{
+    const table=all(page,'table.listOfResourceSettingsPerPlanet')[0];if(!table)return null;
+    const settings={},technologies=[[1,'metalPercent'],[2,'crystalPercent'],[3,'deuteriumPercent'],[4,'solarPercent'],[12,'fusionPercent'],[212,'satellitePercent'],[217,'crawlerPercent']],controls=all(table,'select');
+    for(const [index,[id,key]] of technologies.entries()){
+      const row=Array.from(table.querySelectorAll('tr')||[]).find(item=>Array.from(item.classList||[]).includes(String(id)));
+      const control=all(page,`select[name="last${id}"], select#last${id}, select[data-technology="${id}"], [data-technology="${id}"] select[data-production-percentage]`)[0]||all(row,'select, input[type="range"], input[type="number"]')[0]||(controls.length===7?controls[index]:null);
+      const option=Array.from(control?.options||[]).find(item=>item.defaultSelected)||control?.selectedOptions?.[0];
+      const percent=(option?.textContent||'').match(/(\d+)\s*%/)||row?.cells?.[row.cells.length-1]?.textContent?.match(/^\s*(\d+)\s*%\s*$/);
+      let amount=numericValue(percent?.[1]??option?.value??control?.value);
+      if(!percent&&amount!==null){const values=Array.from(control?.options||[]).map(item=>numericValue(item.value)).filter(value=>value!==null),max=Math.max(0,...values);if(values.length&&max>0&&max<=10)amount*=10;else if(!values.length&&control?.type==='range'&&Number(control.max)>0&&Number(control.max)<=15)amount*=10;else if(!values.length&&!['range','number'].includes(control?.type))amount=null;}
+      if(amount!==null&&amount>=0&&amount<=(id===217?150:100))settings[key]=observedFact(amount);
+    }
+    const summary=Array.from(table.querySelectorAll('tr')||[]).find(row=>Array.from(row.classList||[]).includes('summary')),
+      production=Object.fromEntries(['metal','crystal','deuterium'].map((key,index)=>{const cell=gridCells(summary)[index+2];return [key,observedFact(numericValue(cell?.getAttribute?.('data-raw')??cell?.getAttribute?.('data-value')??cell?.textContent))];}));
+    const result={};if(Object.keys(settings).length)result.settings=settings;if(Object.values(production).every(Boolean))result.production=production;
+    const bonusBreakdown=[];
+    for(const row of Array.from(table.querySelectorAll('tr')||[])){
+      const technologyId=Array.from(row.classList||[]).find(value=>/^\d+$/.test(value)&&Number(value)>=1000&&Number(value)<2000);if(!technologyId)continue;
+      const cells=gridCells(row),values=Object.fromEntries(['metal','crystal','deuterium','energy'].map((key,index)=>[key,observedFact(numericValue(cells[index+2]?.getAttribute?.('data-raw')??cells[index+2]?.getAttribute?.('data-value')??cells[index+2]?.textContent))]).filter(([,value])=>value));
+      if(Object.keys(values).length)bonusBreakdown.push({technologyId,label:String(row.querySelector('.label')?.textContent||cells[0]?.textContent||'').trim().slice(0,100),...values});
+    }
+    if(bonusBreakdown.length)result.bonusBreakdown=bonusBreakdown;
+    return Object.keys(result).length?result:null;
+  };
   const makeBody=(node,id,kind,name)=>{
     if(!id)return null;
     const body={id:String(id),kind:kind==='moon'?'moon':'planet'};
@@ -113,6 +139,11 @@ export function captureVisiblePage(page=document,pageUrl=location.href,observedA
   }
   if(!bodies.length)return {error:'No se detectaron valores económicos visibles reconocidos. Abre Imperio o la vista de recursos; no se inventarán los campos ausentes.'};
   const unique=[...new Map(bodies.map(body=>[`${body.kind}:${body.id}`,body])).values()];
+  const resourceSettings=readResourceSettings();
+  if(resourceSettings){
+    const active=all(page,'.smallplanet.active, #planetList .smallplanet.active, [data-active-body="true"]')[0],activeId=active&&bodyId(active),target=unique.find(body=>body.id===activeId)||(unique.length===1?unique[0]:null);
+    if(target)Object.assign(target,resourceSettings);
+  }
   if(unique.length>32)return {error:'La captura supera el límite de 32 cuerpos.'};
   const snapshot={schema:'ogmk.capture/1',account:{universe,player},observedAt,bodies:unique};
   if(new TextEncoder().encode(JSON.stringify(snapshot)).length>131072)return {error:'La captura supera el límite local de 128 KiB.'};

@@ -1,141 +1,113 @@
-# OGAMEKA · Manual Preview
+# OGAMEKA Local Planner
 
-**A local-first planning prototype for OGame players.** Enter or import economic observations, compare a small set of construction scenarios, and inspect conditional projections on your own computer.
+**A local-first OGame economy viewer and scenario planner.** The browser extension reads selected values from the page you opened after an explicit click, then sends the validated capture to the planner running on your computer.
 
-> **Preview 0.2.1.** Includes a real, user-triggered Manifest V3 capture extension and a local planner. The extension is **not listed as tolerated by Origin**; do not use it on a live OGame account unless the exact version is officially tolerated. This is not an official OGame product, and estimates are not validated game formulas or a global optimum.
+> **Pre-release 0.3.0.** This extension has not been declared tolerated by Origin. Do not capture a live OGame account unless Origin lists this exact version as tolerated. OGAMEKA is unofficial; this release does not establish approval, legal permission from Gameforge, or validation of game formulas.
 
-**Español:** [descripción y guía en español](#español) · **English:** [overview and guide](#english)
+**Español:** [guía en español](#español) · **English:** [overview and setup](#english)
 
 ## Screenshots
 
-Screenshots show the included synthetic demonstration. They contain no account data.
+Screenshots use the built-in synthetic scenario. They contain no player or account data.
 
-![OGAMEKA manual preview: ten synthetic planets shown as a production share doughnut and frequency histogram, with scenario projection](public/screenshots/overview.png)
+![OGAMEKA production overview with per-planet sectors, a histogram, planner controls and a conditional projection](public/screenshots/overview.png)
 
-![OGAMEKA manual preview: explicit data import, retention and deletion controls](public/screenshots/privacy-and-retention.png)
+![OGAMEKA local capture connection, retention and deletion controls](public/screenshots/privacy-and-retention.png)
 
 ## English
 
 ### What it does
 
-- Runs as a local Node.js service bound to `127.0.0.1`.
-- Includes a Manifest V3 extension at the repository root. `manifest.json` loads the popup and one-click visible-DOM capture; permissions are limited to `activeTab` and `scripting`.
-- Captures only after an explicit click on the extension action. It produces reviewable `ogmk.capture/1` JSON and keeps it in the popup for manual copying into the local planner.
-- Accepts a built-in synthetic demo or an explicit, validated economic data import.
-- Compares sequential and per-planet parallel scenarios over 30, 90 or 180 days.
-- Visualizes multi-planet production with a per-planet doughnut chart and a frequency histogram; switch between metal, crystal and deuterium.
-- Shows the assumptions, event timeline, resource balance and conditional projection.
-- Keeps account data in this instance's local store; retention and scoped deletion are available.
-- Provides a minimized support export. No telemetry or central account service is included.
+- Shows production shares and frequency histograms across multiple planets.
+- Compares small, user-defined economic scenarios over 1, 3 or 6 months and displays conditional projections and event timelines.
+- Includes a Manifest V3 browser extension with an explicit, one-click visible-page capture.
+- Sends a capture only to the local planner at `127.0.0.1:3176`, after one-time pairing and the user's click. The extension credential can upload captures; it cannot read the planner's accounts or history.
+- Preserves observation time, quality and source. Missing or unsupported fields remain absent; incomplete critical inputs block analysis.
+- Keeps the planner, account store, charts and analysis on the user's computer. There is no account service, telemetry, automatic game action or third-party data endpoint.
 
-### What it does not do
+The extension does not call OGame APIs, poll game pages, navigate between bodies, read cookies or browser storage, submit orders, dispatch fleets, or collect messages, fleet details or espionage reports. It inspects the visible DOM on the current tab only after the user opens the extension and clicks capture. The optional network permission is limited to the loopback planner host and is requested at runtime.
 
-This package excludes the historic browser extension/bridge, Grafana, game assets/catalogues and the prior integrated application. The new capture extension does not poll OGame, call game APIs, read browser sessions, automate navigation or gameplay, dispatch fleets, read messages or espionage reports, provide absent-player alerts, show ads, or unlock features through donations. It reads only recognized visible fields on the current tab after a click; missing fields remain absent. There is no automatic extension-to-server transport.
+### Limits
 
-Origin's current toleration notice says an installed extension running on an OGame tab must be listed in the Tolerated Tools forum. This preview is not listed or approved. [Read the notice](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) and [forbidden-features guidance](https://forum.origin.ogame.gameforge.com/forum/thread/29-forbidden-features/). Installing the package does not establish toleration.
+The DOM adapter is conservative and depends on OGame's current page structure. It has not been validated against a live, logged-in account; captured data may be partial. The planner's assumptions and formulas are not certified against the game, and a bounded comparison is not a proof of global optimality. Synthetic data is clearly marked and should not be treated as account data.
 
-The built-in demo is synthetic. Imported values are user-provided observations, not independently verified game state. The DOM adapter is conservative and version-sensitive; it has not been validated against a logged-in live account and may return partial captures. The planner models only the fields in its contract; transport, active game queues and many game-specific constraints are excluded. A bounded scenario comparison is not proof of an optimum.
+The extension is not listed as tolerated by Origin. Read [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) and the [Origin toleration notice](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) before considering live use. A GitHub release or browser installation is not an Origin decision.
 
-### Quick start
+### Install and run on Windows
 
-Requires Node.js 24.x. No npm install or runtime package download is needed.
+Requires Node.js 24.x and Chrome, Edge or Opera GX. No runtime package download or `npm install` is required.
 
-```powershell
-# Open PowerShell in the extracted repository root (the folder containing src and manifest.json).
-Test-Path .\src\server.mjs
-node .\src\server.mjs
-```
+1. Extract the repository ZIP. Open PowerShell in the extracted folder, the one containing both `manifest.json` and `src\server.mjs`.
+2. Start the local planner:
 
-Keep that PowerShell window open. It must print `OGMK manual preliminary: http://127.0.0.1:3176`; if Node reports an error or you close the window, the address will not load. In a browser, open <http://127.0.0.1:3176>. In a second PowerShell window opened in the same repository root, read `.data-independent/pair-code.txt`, enter the one-time code in the page, and choose **Cargar demostración sintética**. Select a horizon and press **Analizar hipótesis**. See [HOWTO.md](HOWTO.md) for the full Windows walkthrough, manual JSON import, data location and shutdown steps.
+   ```powershell
+   Test-Path .\manifest.json
+   Test-Path .\src\server.mjs
+   node .\src\server.mjs
+   ```
 
-The ZIP includes `manifest.json` at its root so Opera GX/Chromium can load the extracted folder as an unpacked extension. The extension captures real visible values only after a click and presents JSON for manual import; it does not query or send anything automatically. **Do not use it on a live account while this version is not listed as tolerated by Origin.** See [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) for scope and limitations.
+   Both checks should print `True`. Keep the window open. The service prints `OGAMEKA local planner: http://127.0.0.1:3176` and stores data in `.data-ogameka` under this folder. Use a private local folder.
 
-The pairing code is private and expires after five minutes; do not paste it into an issue or share it. Use a private local directory. `Ctrl+C` stops the service. It does not replace the existing OGAMEKA service or Docker volumes.
+3. Open <http://127.0.0.1:3176>. Read `.data-ogameka\pair-code.txt` in a second PowerShell window and enter it in the planner. The code expires after five minutes and pairs only this local panel session.
+4. Load the extracted repository folder as an unpacked extension: `opera://extensions`, `chrome://extensions`, or `edge://extensions` → enable Developer mode → **Load unpacked**. Select the folder containing the root `manifest.json`.
+5. In the planner, open **Datos y privacidad** and choose **Generar código temporal**. Click the extension while an OGame page is open, enter that code, and press **Capturar y sincronizar**. Approve the optional `127.0.0.1` permission when prompted. The one-time code expires after three minutes; the upload credential expires after 24 hours and can be revoked from either side.
+6. The account appears in the planner after a valid capture. For a UI tour without a game account, choose **Cargar demo**; all values in that scenario are synthetic.
 
-When running from the full development checkout instead of the standalone preview branch/package, use its `independent` directory as the working directory.
+The extension uses `activeTab` and `scripting` to read the current page after a click. Its local-host permission is optional and requested only for synchronization. It has no persistent OGame host permission, background worker, timer, or game API call.
 
-### Privacy and safety
+See [HOWTO.md](HOWTO.md) for the complete walkthrough, [PRIVACY.md](PRIVACY.md) for data handling, and [CONTRACT.md](CONTRACT.md) for the validated capture format.
 
-The service binds to loopback by default and makes no outbound request. Only import economic fields defined by `ogmk.capture/1`; do not include passwords, cookies, session tokens, messages, espionage reports or another player's private data. The optional Ko-fi link opens only after the user chooses it and sends no OGAMEKA data.
+### License and support
 
-Read [PRIVACY.md](PRIVACY.md), [CONTRACT.md](CONTRACT.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [MIGRATION.md](MIGRATION.md) before using non-synthetic data. Backups are local and are not encrypted by this preview.
+This 0.3.0 edition is offered under [GNU GPL v3.0 only](LICENSE), within the boundary in [LICENSE-SCOPE.md](LICENSE-SCOPE.md). That scope excludes historical tracker files and third-party game materials. The earlier 0.2.1 preview had a separate Apache-2.0 grant; this release does not revoke it.
 
-### Validation
-
-```powershell
-node --test test/*.test.mjs
-```
-
-Tests use synthetic fixtures and temporary local services. They do not validate live OGame formulas, account capture or Origin tolerance. The preparation run also exercised the UI at three viewport widths, checked that a forged HTML payload remained inert and verified zero outbound requests. Those browser-only checks require Playwright and are not part of this minimal package.
-
-### Ko-fi
-
-Support is optional: <https://ko-fi.com/yahvveh>. Contributions do not provide access, unlock features or give an in-game advantage. Verify the destination while signed in to the Ko-fi account before sharing this preview.
-
-### License
-
-The files in this standalone manual edition are offered under **Apache License 2.0**, subject to [LICENSE-SCOPE.md](LICENSE-SCOPE.md) and [NOTICE.md](NOTICE.md). This license does not cover the historic repository outside this edition, OGame/Gameforge materials, trademarks, or any third-party components that are not listed as included here. It is not a statement of permission from Gameforge or of Origin tolerance.
-
----
+Optional support: [Ko-fi · Yahvveh](https://ko-fi.com/yahvveh). Donations do not unlock features, access or gameplay advantages.
 
 ## Español
 
 ### Qué ofrece
 
-- Se ejecuta como servicio local de Node.js, ligado a `127.0.0.1`.
-- Incluye una extensión Manifest V3 en la raíz del repositorio. `manifest.json` declara únicamente los permisos `activeTab` y `scripting`.
-- Captura tras un clic explícito, muestra JSON revisable `ogmk.capture/1` y permite copiarlo manualmente al planificador local.
-- Incluye una demo sintética y admite importar explícitamente datos económicos validados.
-- Compara escenarios secuenciales y paralelos por planeta en periodos de 30, 90 o 180 días.
-- Representa la producción de varios planetas en un gráfico de sectores y un histograma; permite cambiar entre metal, cristal y deuterio.
-- Muestra hipótesis, calendario de eventos, saldo de recursos y proyección condicional.
-- Guarda los datos en el almacén local de esta instancia; permite configurar retención y borrado acotado.
-- Permite exportar un diagnóstico minimizado. No incluye telemetría ni servicio central de cuentas.
+- Compara la producción de varios planetas con sectores e histogramas.
+- Explora escenarios económicos definidos por el usuario en horizontes de 1, 3 o 6 meses, con proyecciones condicionadas y calendario estimado.
+- Incluye una extensión Manifest V3 que consulta los datos visibles de la página actual tras un clic explícito.
+- Envía la captura únicamente al planificador local `127.0.0.1:3176`, después de un emparejamiento de un solo uso y de pulsar **Capturar y sincronizar**. La credencial solo permite subir capturas; no permite leer cuentas ni historial.
+- Conserva fecha, calidad y procedencia. Los campos ausentes o no reconocidos siguen ausentes; el análisis se bloquea si faltan datos críticos.
+- Mantiene cuentas, gráficos y cálculos en el equipo. No incluye telemetría, servidor de cuentas ni transmisión a servicios externos.
 
-### Qué queda fuera
+La extensión no llama a las API de OGame, no consulta páginas en bucle, no cambia de planeta, no lee cookies ni almacenamiento del navegador, no envía órdenes ni flotas y no recopila mensajes o informes de espionaje. Lee solo el DOM visible de la pestaña actual después de abrir la extensión y pulsar el botón. El permiso de red local es opcional y se solicita en el momento de emparejar.
 
-El paquete excluye la extensión/puente históricos, Grafana, recursos y catálogos del juego y la aplicación integrada anterior. La nueva extensión no consulta OGame ni llama a sus API, no lee sesiones, no automatiza navegación ni acciones, no envía flotas, no lee mensajes ni informes de espionaje ni transmite capturas automáticamente. Solo lee campos visibles reconocidos de la pestaña actual tras un clic; no inventa los ausentes.
+### Límites y tolerancia
 
-El aviso vigente de Origin indica que una extensión instalada que se ejecuta en una pestaña de OGame debe figurar en el foro de herramientas toleradas. Esta preliminar no está listada ni aprobada. [Lee el aviso](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) y las [reglas de funciones prohibidas](https://forum.origin.ogame.gameforge.com/forum/thread/29-forbidden-features/). Instalar el paquete no implica tolerancia.
+El adaptador depende de la estructura actual de las páginas de OGame. No se ha validado en una cuenta real iniciada y puede producir capturas parciales. Las fórmulas del planificador no están certificadas contra el juego y la búsqueda acotada no demuestra un óptimo global. La demo está marcada como sintética.
 
-La demo contiene datos sintéticos. Los datos importados son observaciones aportadas por el usuario, no un estado del juego verificado de forma independiente. El adaptador DOM es conservador y depende de la versión; no se ha validado con una cuenta real iniciada y puede producir capturas parciales. El planificador solo modela los campos de su contrato; excluye transporte, colas activas y numerosas restricciones del juego. Una búsqueda acotada no demuestra que se haya encontrado un óptimo global.
+Origin no ha declarado tolerada esta extensión. Consulta [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) y el [aviso de tolerancia de Origin](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) antes de valorar su uso en una cuenta activa. Publicar en GitHub o instalar la extensión no equivale a una decisión de Origin.
 
-### Inicio rápido
+### Instalación en Windows
 
-Requiere Node.js 24.x. No hace falta instalar paquetes npm ni descargar dependencias de ejecución.
+Necesitas Node.js 24.x y Chrome, Edge u Opera GX. No hace falta descargar paquetes ni ejecutar `npm install`.
 
-```powershell
-# Abre PowerShell en la raíz extraída (la carpeta que contiene src y manifest.json).
-Test-Path .\src\server.mjs
-node .\src\server.mjs
-```
+1. Descomprime el ZIP y abre PowerShell en la carpeta que contiene `manifest.json` y `src\server.mjs`.
+2. Inicia el planificador:
 
-Deja abierta esa ventana de PowerShell. Debe mostrar `OGMK manual preliminary: http://127.0.0.1:3176`; si Node informa de un error o cierras la ventana, la dirección no cargará. En el navegador, abre <http://127.0.0.1:3176>. En una segunda ventana de PowerShell, también situada en la raíz del repositorio, lee `.data-independent/pair-code.txt`, introduce el código de un solo uso en la página y pulsa **Cargar demostración sintética**. Elige el periodo y pulsa **Analizar hipótesis**. Consulta [HOWTO.md](HOWTO.md) para la guía completa en Windows, la importación JSON, la ubicación de datos y el cierre.
+   ```powershell
+   Test-Path .\manifest.json
+   Test-Path .\src\server.mjs
+   node .\src\server.mjs
+   ```
 
-El ZIP incluye `manifest.json` en la raíz para cargar la carpeta descomprimida en Opera GX/Chromium. La extensión captura valores visibles reales solo tras pulsar su botón y muestra JSON para importarlo manualmente; no consulta ni transmite datos automáticamente. **No la uses con una cuenta activa mientras esta versión no esté listada como tolerada por Origin.** Consulta [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md) para conocer su alcance y límites.
+   Las dos comprobaciones deben devolver `True`. Mantén la ventana abierta. El servicio mostrará `OGAMEKA local planner: http://127.0.0.1:3176` y guardará los datos en `.data-ogameka`. Usa una carpeta local y privada.
 
-Si ejecutas desde el repositorio completo de desarrollo, usa su carpeta `independent` como directorio de trabajo.
+3. Abre <http://127.0.0.1:3176>. En otra ventana de PowerShell, lee `.data-ogameka\pair-code.txt` e introduce el código en el planificador. Caduca a los cinco minutos y empareja la sesión del panel local.
+4. Carga la carpeta extraída como extensión sin empaquetar: `opera://extensions`, `chrome://extensions` o `edge://extensions` → activa el modo desarrollador → **Cargar descomprimida**. Selecciona la carpeta que contiene el `manifest.json` raíz.
+5. En **Datos y privacidad**, pulsa **Generar código temporal**. Con una página de OGame abierta, pulsa el icono de la extensión, introduce el código y elige **Capturar y sincronizar**. Acepta el permiso opcional para `127.0.0.1`. El código dura tres minutos; la credencial de subida dura 24 horas y puede revocarse desde cualquiera de las dos interfaces.
+6. Una captura válida añade la cuenta al planificador. Para explorar la interfaz sin conectar una cuenta, pulsa **Cargar demo**; sus cifras son sintéticas.
 
-El código de emparejamiento es privado y caduca a los cinco minutos; no lo publiques en una incidencia ni lo compartas. Utiliza una carpeta local privada. `Ctrl+C` detiene el servicio. No sustituye el servicio OGAMEKA existente ni sus volúmenes Docker.
+La extensión usa `activeTab` y `scripting` para leer la pestaña actual después del clic. El permiso del host local es opcional y se solicita para sincronizar; no existen permisos persistentes sobre OGame, worker de fondo, temporizadores ni llamadas a las API del juego.
 
-### Privacidad y seguridad
+Consulta [HOWTO.md](HOWTO.md), [PRIVACY.md](PRIVACY.md) y [CONTRACT.md](CONTRACT.md).
 
-El servicio escucha en loopback por defecto y no realiza peticiones externas. Importa únicamente campos económicos definidos en `ogmk.capture/1`; no incluyas contraseñas, cookies, tokens de sesión, mensajes, informes de espionaje ni datos privados de otros jugadores. El enlace opcional de Ko-fi solo se abre cuando el usuario lo elige y no transmite datos de OGAMEKA.
+### Licencia y apoyo
 
-Lee [PRIVACY.md](PRIVACY.md), [CONTRACT.md](CONTRACT.md), [ARCHITECTURE.md](ARCHITECTURE.md) y [MIGRATION.md](MIGRATION.md) antes de usar datos no sintéticos. Las copias locales de esta preliminar no están cifradas.
+Esta edición 0.3.0 se ofrece bajo [GNU GPL v3.0 únicamente](LICENSE), dentro del alcance de [LICENSE-SCOPE.md](LICENSE-SCOPE.md). Quedan fuera el código histórico del tracker y los materiales de terceros. La edición 0.2.1 tuvo una licencia Apache-2.0 separada; esta versión no la revoca.
 
-### Validación
-
-```powershell
-node --test test/*.test.mjs
-```
-
-Las pruebas usan datos sintéticos y servicios locales temporales. No validan fórmulas con OGame en vivo, la captura de cuentas ni la tolerancia de Origin. Durante la preparación también se probó la interfaz en tres resoluciones, se verificó que HTML falsificado quedara inerte y que no hubiera peticiones externas. Esas pruebas de navegador requieren Playwright y no forman parte del paquete mínimo.
-
-### Ko-fi
-
-El apoyo es opcional: <https://ko-fi.com/yahvveh>. Las aportaciones no conceden acceso, desbloquean funciones ni ofrecen ventajas en el juego. Verifica el destino desde la cuenta de Ko-fi antes de compartir esta preliminar.
-
-### Licencia
-
-Los archivos de esta edición manual autónoma se ofrecen bajo **Apache License 2.0**, sujetos a [LICENSE-SCOPE.md](LICENSE-SCOPE.md) y [NOTICE.md](NOTICE.md). Esta licencia no cubre el resto histórico del repositorio, materiales de OGame/Gameforge, marcas ni componentes de terceros que no figuren aquí como incluidos. Tampoco afirma que Gameforge haya dado permiso ni que Origin tolere el programa.
+Apoyo opcional: [Ko-fi · Yahvveh](https://ko-fi.com/yahvveh). Las aportaciones no desbloquean funciones, acceso ni ventajas de juego.

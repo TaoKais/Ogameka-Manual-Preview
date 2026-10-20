@@ -28,7 +28,10 @@ function renderBodies(){
       else{cell.textContent=value?.value==null?'Sin dato':number(value.value);cell.title=value?value.quality+' · '+value.observedAt:'ausente';}
       row.append(cell);
     }
-    rows.append(row);
+    const details=document.createElement('td'),facts=[];
+    for(const [key,fact] of Object.entries(body.settings||{}))if(fact?.value!==null&&fact?.value!==undefined)facts.push(key.replace('Percent','')+' '+number(fact.value)+'%');
+    for(const bonus of body.bonusBreakdown||[]){const values=['metal','crystal','deuterium','energy'].filter(key=>bonus[key]?.value!==null&&bonus[key]?.value!==undefined).map(key=>key+' '+number(bonus[key].value));if(values.length)facts.push((bonus.label||bonus.technologyId)+': '+values.join(', '));}
+    details.textContent=facts.join(' · ')||'Sin ajustes observados';row.append(details);rows.append(row);
   }
 }
 function renderPie(entries,total){
@@ -66,9 +69,9 @@ function renderPlanetVisuals(){
   const resource=$('chartResource').value,bodies=(selected()?.latest.bodies||[]).filter(body=>body.kind!=='moon'),entries=bodies.map((body,index)=>({name:body.name||`Planeta ${index+1}`,value:Number(body.production?.[resource]?.value)})).filter(entry=>Number.isFinite(entry.value)&&entry.value>=0),total=entries.reduce((sum,entry)=>sum+entry.value,0),account=selected()?.latest.account,synthetic=account?.universe==='synthetic'||entries.some(entry=>entry.source==='synthetic');
   renderPie(entries,total);renderHistogram(entries,resource);
   $('metric-planets').textContent=String(entries.length);$('metric-resource').textContent=`${resourceNames[resource]} / h`;$('metric-total').textContent=number(total);$('metric-spread').textContent=entries.length?`${compact(Math.min(...entries.map(entry=>entry.value)))}–${compact(Math.max(...entries.map(entry=>entry.value)))}`:'—';
-  $('metric-quality').textContent=synthetic?'valores simulados · sin cuenta real':`${entries.length} valores manuales · no verificados`;$('metric-unit').textContent='unidades agregadas por hora';$('hist-count').textContent=String(entries.length);$('hist-range').textContent=entries.length?`${number(Math.min(...entries.map(entry=>entry.value)))}–${number(Math.max(...entries.map(entry=>entry.value)))}`:'—';
-  $('viz-source-mark').textContent=synthetic?'SIM':'MAN';$('viz-source-label').textContent=synthetic?'DEMO SINTÉTICA':'DATOS MANUALES';
-  const missing=bodies.length-entries.length;$('chart-quality-note').textContent=missing?`${entries.length} planetas con dato de ${bodies.length}; ${missing} sin valor válido para ${resourceNames[resource].toLowerCase()}.`:`${synthetic?'En la demo todos los valores son simulados.':'Los valores proceden de una entrada manual y no han sido verificados.'} Las gráficas describen los datos cargados; no validan fórmulas ni representan una cuenta real.`;
+  $('metric-quality').textContent=synthetic?'valores simulados · sin cuenta real':`${entries.length} valores capturados · ${selected()?.latest.observedAt?new Date(selected().latest.observedAt).toLocaleString('es-ES'):'sin captura'}`;$('metric-unit').textContent='unidades agregadas por hora';$('hist-count').textContent=String(entries.length);$('hist-range').textContent=entries.length?`${number(Math.min(...entries.map(entry=>entry.value)))}–${number(Math.max(...entries.map(entry=>entry.value)))}`:'—';
+  $('viz-source-mark').textContent=synthetic?'SIM':'OBS';$('viz-source-label').textContent=synthetic?'DEMO SINTÉTICA':'DATOS OBSERVADOS';
+  const missing=bodies.length-entries.length;$('chart-quality-note').textContent=missing?`${entries.length} planetas con dato de ${bodies.length}; ${missing} sin valor válido para ${resourceNames[resource].toLowerCase()}.`:`${synthetic?'En la demo todos los valores son simulados.':'Los valores proceden de la página visible y no han sido verificados.'} Las gráficas describen los datos capturados; no validan fórmulas ni representan una cuenta real.`;
 }
 async function refresh(){
   state=await api('/api/state');const previous=$('account').value;
@@ -81,12 +84,13 @@ function action(id,handler){$(id).addEventListener('click',async()=>{const butto
 $('pairForm').addEventListener('submit',async event=>{event.preventDefault();try{await api('/api/pair',{code:$('pairCode').value});$('pairCode').value='';await refresh();status('Sesión local emparejada. Ningún dato se envía a OGame.');}catch(error){status(error.message,true);}});
 document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.page').forEach(page=>page.hidden=page.id!==button.dataset.page);document.querySelectorAll('[data-page]').forEach(tab=>tab.classList.toggle('active',tab===button));}));
 action('demo',async()=>{const result=await api('/api/demo',{});await refresh();$('goals').value=JSON.stringify(result.plan.goals,null,2);status('Demo sintética cargada: '+result.plan.goals.length+' planetas simulados. Ninguna cifra procede de una cuenta real.');});
-action('import',async()=>{await api('/api/capture',JSON.parse($('capture').value));await refresh();status('Entrada validada y guardada únicamente en esta instancia.');});
+action('extensionPairCode',async()=>{const result=await api('/api/extension/pair-code',{});$('extensionCode').textContent='Código temporal: '+result.code+' · caduca en 3 min';$('extensionCode').hidden=false;status('Código creado. Introdúcelo en la extensión y confirma la captura desde la pestaña del juego.');});
+action('revokeExtensions',async()=>{await api('/api/extension/revoke-all',{});$('extensionCode').hidden=true;status('Credenciales de extensión revocadas.');});
 action('retention',async()=>{await api('/api/retention',{days:Number($('days').value),snapshots:Number($('snapshots').value)});await refresh();status('Retención aplicada. Historial podado.');});
 action('support',async()=>{const data=await api('/api/support'),link=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));link.href=url;link.download='ogmk-diagnostico-anonimizado.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Diagnóstico anonimizado exportado. Revísalo antes de compartirlo.');});
-action('wipe',async()=>{await api('/api/data',{scope:'independent-store-only',confirm:$('confirmation').value},'DELETE');$('workspace').hidden=true;$('pairing').hidden=false;$('confirmation').value='';$('capture').value='';$('goals').value='';state={accounts:{}};status('Datos de esta instancia borrados. Reinicia este proceso para generar un nuevo código de emparejamiento.');});
+action('wipe',async()=>{await api('/api/data',{scope:'independent-store-only',confirm:$('confirmation').value},'DELETE');$('workspace').hidden=true;$('pairing').hidden=false;$('confirmation').value='';$('goals').value='';state={accounts:{}};status('Datos de esta instancia borrados. Reinicia este proceso para generar un nuevo código de emparejamiento.');});
 action('analyze',async()=>{
-  if(!selected())throw Error('Carga una demostración o una entrada manual primero.');
+  if(!selected())throw Error('Captura datos con la extensión o carga la demostración sintética.');
   const horizon=Number($('horizon').value),result=await api('/api/analyze',{account:selected().latest.account,goals:JSON.parse($('goals').value||'[]'),horizonHours:horizon,intervalHours:Number($('step').value),parallel:$('execution').value==='parallel',weights:[1,1.5,3]});
   $('events').replaceChildren();$('chart').replaceChildren();$('kpis').replaceChildren();
   if(result.status==='blocked'){status('Análisis bloqueado: '+result.issues.length+' datos críticos pendientes, provisionales o antiguos.',true);$('limits').textContent=result.issues.map(issue=>issue.bodyId+' · '+issue.field+' · '+issue.reason).join('\n');return;}

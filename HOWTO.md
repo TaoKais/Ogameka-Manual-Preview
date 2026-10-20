@@ -1,26 +1,18 @@
-# How to run OGAMEKA Manual Preview
+# How to use OGAMEKA Local Planner
 
-This guide uses PowerShell on Windows and the synthetic demo. The local planner can run without an OGame login. The optional browser extension is a separate, user-triggered visible-DOM capture and is **not tolerated by Origin** at this time.
+This guide covers the local planner, browser extension, one-time pairing, synthetic demo, and local data controls. The extension has not been declared tolerated by Origin. Do not capture a live account unless Origin lists this exact version.
 
-## 1. Check Node.js
+## 1. Requirements
 
-Use Node.js 24.x. In PowerShell:
+- Windows 10/11 with Node.js 24.x.
+- Chrome, Edge, or Opera GX.
+- The extracted project folder, containing `manifest.json` and `src\server.mjs`.
 
-```powershell
-node --version
-```
+The application uses Node's built-in modules; do not run `npm install`.
 
-The manual preview uses only Node.js built-in modules; do not run `npm install` for this edition.
+## 2. Start the local planner
 
-## 2. Load the extension package (inspection only)
-
-The repository root contains `manifest.json`. After extracting the GitHub ZIP, that root folder is the unpacked extension folder: in Opera GX open `opera://extensions`, enable Developer mode, choose **Load unpacked**, and select the extracted `Ogameka-Manual-Preview-main` folder. In Chrome use `chrome://extensions` and the equivalent **Load unpacked** action.
-
-Origin's current rule says installed extensions running on an OGame tab must be on the official Tolerated Tools list. This preview is not listed. You may inspect the package, but **do not run its capture on a live OGame account unless Origin has listed the exact version**. See [CAPTURE-DESIGN.md](CAPTURE-DESIGN.md).
-
-## 3. Start an isolated instance
-
-Open PowerShell with its current directory set to the extracted repository root, which contains both `manifest.json` and `src\server.mjs`. Check that you are in the right folder, then start the service:
+Open PowerShell in the extracted folder:
 
 ```powershell
 Test-Path .\manifest.json
@@ -28,109 +20,60 @@ Test-Path .\src\server.mjs
 node .\src\server.mjs
 ```
 
-Both `Test-Path` commands must return `True`. Keep this PowerShell window open. On success, Node prints `OGMK manual preliminary: http://127.0.0.1:3176`; the URL will refuse connections if the process is stopped or failed to start. The service binds to `127.0.0.1:3176`. It uses `.data-independent` under this directory. This location is independent of the existing OGAMEKA Docker volumes. Choose a private directory and do not put it in a shared or cloud-synced folder if that does not match your privacy needs.
+Both checks must return `True`. Leave the window open. The service binds only to `127.0.0.1:3176` and creates `.data-ogameka` beside the project. Port 3176 is fixed for extension synchronization; if it is occupied, resolve the conflicting local process before starting this edition. Use a private folder; do not point this edition at old Docker volumes or browser databases.
 
-When running from the full development checkout instead of this standalone preview package, use its `independent` directory as the working directory.
+## 3. Pair the local panel
 
-## 4. Pair this browser window
-
-With the server still running, open <http://127.0.0.1:3176> in your browser. In a second PowerShell window opened in the same repository root, read the one-time code:
+Open <http://127.0.0.1:3176>. In a second PowerShell window, read the one-time panel code:
 
 ```powershell
-Get-Content .\.data-independent\pair-code.txt
+Get-Content .\.data-ogameka\pair-code.txt
 ```
 
-Enter the code in the page and select **Emparejar**. The code expires after five minutes and is removed after pairing. Keep it private. The local session expires after one hour.
+Enter the eight digits in the page and press **Emparejar**. The code expires after five minutes and is removed after successful pairing. The panel session expires after one hour.
 
-## 5. Explore the synthetic scenario
+## 4. Load the extension
 
-Select **Cargar demostración sintética**. Confirm that the account is marked `synthetic / demo` and the bodies are named `Planeta sintético`. Choose a horizon, execution mode and sampling interval, then select **Analizar hipótesis**. Values in the demo are illustrative only.
+In `opera://extensions`, `chrome://extensions`, or `edge://extensions`, enable Developer mode and choose **Load unpacked**. Select the extracted folder containing the root `manifest.json`. The extension does not use a persistent game-site permission or background worker.
 
-The displayed projection depends on entered prices, durations, production gains, initial stocks and model assumptions. It does not submit orders to OGame and does not prove a global optimum.
+## 5. Pair and capture
 
-The planet overview starts with a doughnut chart that assigns one sector to each planet and a histogram that groups planet production into value ranges. Use the **Resource** selector to compare metal, crystal and deuterium. The demo chart is intentionally synthetic; it is useful for exploring the interface, not as a prediction of a real empire.
+1. In the planner, open **Datos y privacidad** and click **Generar código temporal**.
+2. Open the OGame page you intend to inspect. Do not use the extension on a live account until this exact version is tolerated by Origin.
+3. Click the extension icon. On the first capture, enter the temporary code from the planner.
+4. Click **Capturar y sincronizar**. The browser requests optional access to `http://127.0.0.1:3176`; approve only if you want the local synchronization.
+5. The extension reads recognized visible fields from the current page and sends the validated capture to the paired local service. It does not navigate, refresh, select another planet, or call OGame APIs.
 
-## 6. Import your own reviewed economic data (optional)
+The code expires in three minutes. The resulting upload-only credential expires after 24 hours. It cannot read planner accounts, history, export files, or settings. Disconnect it from the extension popup, or revoke all extension pairings from **Datos y privacidad**. Revocation is local; if the planner is stopped, use its revocation control after restarting.
 
-Open **Datos y privacidad** and paste a JSON document that follows [`CONTRACT.md`](CONTRACT.md). Choose **Validar y guardar**. The contract rejects unsupported fields and invalid or oversized inputs. Do not include login/session data, messages, fleet details, espionage reports or information about another player. Review every value and its observation date before planning.
+## 6. Explore without an account
 
-Imported data is not independently verified against OGame. Missing or stale critical values should remain missing; do not replace them with guessed zeros.
+Choose **Cargar demo** to generate ten synthetic planets. Select a resource, horizon, sampling interval, and execution mode, then choose **Analizar hipótesis**. The demo is not a snapshot of OGame. Planning results are conditional on the displayed assumptions and do not establish a global optimum.
 
-## 7. Retention, export and deletion
+For a real capture, inspect source, timestamp, quality, missing fields, and production settings before relying on the charts. The adapter may be partial, and the model blocks analysis when critical fields are absent or stale.
 
-The privacy page lets you prune history and export a minimized support diagnostic. The diagnostic omits names, original identifiers, coordinates, quantities, levels and dates; it is still a file you control and should review before sharing.
+## 7. Retention, export, and deletion
 
-The deletion control removes only this preview instance's store, backup and local pairing state. It does not erase browser-extension data, files you exported, system backups or existing Docker volumes. Confirm the exact scope shown in the UI before deletion.
+In **Datos y privacidad**, set the retention limits, export a minimized support diagnostic, revoke extension credentials, or delete this instance's local store. Deletion invalidates local sessions and extension tokens. It does not erase exported files, operating-system backups, browser-profile backups, or other OGAMEKA installations.
 
 ## 8. Stop the service
 
-Return to the PowerShell window running Node and press `Ctrl+C`. The instance stops; its local data remains in `.data-independent` until you delete it yourself or use the scoped deletion control.
+Press `Ctrl+C` in the Node window. Data remains in `.data-ogameka` until you use the scoped deletion control or remove that dedicated folder after stopping the service.
 
 ## Troubleshooting
 
-- **Port already in use:** stop only the other process using port 3176 or set an unused `OGMK_PORT` between 1024 and 65535. Keep the service on `127.0.0.1`.
-- **Pair code missing:** start the service and check `.data-independent\pair-code.txt` immediately; the code is short-lived.
-- **Browser cannot connect:** verify the server window is still running and open the exact local URL `http://127.0.0.1:3176`.
-- **Do not point this preview at existing data:** use a new data directory. The application rejects a directory marked for a different store.
+- **Pair code file missing:** start the service from the extracted root and read the code within five minutes.
+- **Extension cannot connect:** confirm Node is still running at `127.0.0.1:3176`, reload the extension, and check that optional local-host access is granted.
+- **Pair code rejected:** generate a fresh code in the planner; each code is single-use and expires after three minutes.
+- **Capture returns no data:** use a supported visible economic page and ensure the browser granted temporary `activeTab` access. The adapter is conservative and may not recognize changed page markup.
+- **Capture saved but analysis is blocked:** review the missing/stale inputs. Do not replace unknown data with zero or treat a projected result as verified.
 
-## Run checks
+## Run tests
 
-From `independent`:
-
-```powershell
-node --test test/*.test.mjs
-```
-
-These checks use synthetic inputs and temporary services. They do not verify live OGame formulas, policy/tolerance or production security. A browser UI smoke test also passed during preparation; it requires development-only Playwright tooling that is not bundled in the preview.
-
----
-
-## Guía en español
-
-### Requisitos
-
-Instala Node.js 24.x y comprueba la versión en PowerShell:
-
-```powershell
-node --version
-```
-
-La preliminar usa módulos incluidos con Node. No ejecutes `npm install`.
-
-### Iniciar una instancia aislada
-
-Abre PowerShell en la raíz extraída del repositorio, que contiene `manifest.json` y `src\server.mjs`:
-
-```powershell
-Test-Path .\manifest.json
-Test-Path .\src\server.mjs
-node .\src\server.mjs
-```
-
-Los dos comandos `Test-Path` deben devolver `True`. Deja abierta la ventana: Node debe mostrar `OGMK manual preliminary: http://127.0.0.1:3176`. Si el proceso se detiene o falla al iniciar, la URL rechazará la conexión. El servicio escucha en `127.0.0.1:3176` y crea `.data-independent` en ese directorio. No reutiliza los volúmenes Docker de OGAMEKA. Mantén esa carpeta en una ubicación privada y local. Desde el repositorio completo de desarrollo, usa su carpeta `independent`.
-
-### Emparejar y probar la demo
-
-Con el servicio aún ejecutándose, abre <http://127.0.0.1:3176>. En otra ventana de PowerShell, situada en la misma raíz, lee el código de un solo uso:
-
-```powershell
-Get-Content .\.data-independent\pair-code.txt
-```
-
-Introdúcelo en la página y pulsa **Emparejar**. Caduca a los cinco minutos y se elimina al emparejar; la sesión dura una hora. No compartas el código. Pulsa **Cargar demostración sintética**, confirma que la cuenta aparece como `synthetic / demo`, selecciona el periodo y el modo de ejecución, y pulsa **Analizar hipótesis**.
-
-### Importar y borrar
-
-En **Datos y privacidad** puedes pegar una captura económica revisada que cumpla el [contrato `ogmk.capture/1`](CONTRACT.md). No incluyas claves, cookies, sesiones, mensajes, informes de espionaje ni información privada de otros jugadores. Los datos importados no se verifican contra OGame.
-
-La misma pantalla permite podar historial, exportar un diagnóstico reducido y borrar solo el almacén y la sesión de esta preliminar. El borrado no elimina extensiones, exportaciones ni volúmenes Docker previos.
-
-### Detener y probar
-
-Vuelve a la ventana que ejecuta Node y pulsa `Ctrl+C`. La instancia se detiene; el almacén local permanece hasta que lo borres expresamente. Para ejecutar las pruebas desde la raíz de la preliminar:
+From the extracted root:
 
 ```powershell
 node --test test/*.test.mjs
 ```
 
-Son pruebas con datos sintéticos y servicios locales temporales. No validan fórmulas con una partida activa, tolerancia de Origin ni seguridad de producción.
+Tests use synthetic fixtures and temporary local services. They do not validate live DOM coverage, game formulas, Origin tolerance, or a production browser-store review.

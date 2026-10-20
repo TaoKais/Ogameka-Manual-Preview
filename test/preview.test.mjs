@@ -26,7 +26,7 @@ test('the synthetic demo provides ten varied planets for the multi-planet charts
   assert.ok(new Set(metals).size>1);
 });
 
-test('standalone manual preview pairs locally and calculates the synthetic scenario',async t=>{
+test('OGAMEKA planner pairs locally and calculates the synthetic scenario',async t=>{
   const app=await setup(t),page=await fetch(app.url),html=await page.text();
   assert.equal(page.status,200);
   assert.match(html,/https:\/\/ko-fi\.com\/yahvveh/);
@@ -41,11 +41,25 @@ test('standalone manual preview pairs locally and calculates the synthetic scena
   assert.equal((await fetch(app.url+'/health')).status,200);
 });
 
-test('manual preview rejects cross-origin writes and does not enable capture bridge',async t=>{
+test('local pairing rejects cross-origin writes and keeps the extension write-only',async t=>{
   const app=await setup(t),cookie=await pair(app),sample=demo();
   const cross=await fetch(app.url+'/api/demo',{method:'POST',headers:{Origin:'https://foreign.invalid',Cookie:cookie,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:'{}'});
   assert.equal(cross.status,403);
   const hidden={...sample,sessionToken:'must reject'};
-  assert.equal((await post(app,'/api/capture',cookie,hidden)).status,400);
-  assert.deepEqual(app.store.read().accounts,{});
+  assert.equal((await post(app,'/api/capture',cookie,hidden)).status,404);
+  const panelCode=await post(app,'/api/extension/pair-code',cookie,{}),{code}=await panelCode.json();
+  assert.equal(panelCode.status,200);assert.match(code,/^\d{8}$/);
+  const extensionOrigin='chrome-extension://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+  const preflight=await fetch(app.url+'/api/extension/capture',{method:'OPTIONS',headers:{Origin:extensionOrigin,'Access-Control-Request-Method':'POST','Access-Control-Request-Headers':'authorization,content-type,x-ogmk-intent'}});
+  assert.equal(preflight.status,204);assert.equal(preflight.headers.get('access-control-allow-origin'),extensionOrigin);
+  const webOrigin=await fetch(app.url+'/api/extension/pair',{method:'POST',headers:{Origin:'https://foreign.invalid','Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify({code})});assert.equal(webOrigin.status,403);
+  const pairing=await fetch(app.url+'/api/extension/pair',{method:'POST',headers:{Origin:extensionOrigin,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify({code})});
+  assert.equal(pairing.status,200);const {token}=await pairing.json();assert.match(token,/^[a-f0-9]{64}$/);
+  const upload=await fetch(app.url+'/api/extension/capture',{method:'POST',headers:{Origin:extensionOrigin,Authorization:'Bearer '+token,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify(sample)});
+  assert.equal(upload.status,200);assert.ok(app.store.read().accounts['synthetic/demo']);
+  const otherExtension=await fetch(app.url+'/api/extension/capture',{method:'POST',headers:{Origin:'chrome-extension://bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',Authorization:'Bearer '+token,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify(sample)});assert.equal(otherExtension.status,401);
+  const read=await fetch(app.url+'/api/state',{headers:{Origin:extensionOrigin,Authorization:'Bearer '+token}});assert.equal(read.status,403);
+  const revoked=await fetch(app.url+'/api/extension/pair',{method:'DELETE',headers:{Origin:extensionOrigin,Authorization:'Bearer '+token,'X-OGMK-Intent':'user'}});assert.equal(revoked.status,200);
+  const afterRevoke=await fetch(app.url+'/api/extension/capture',{method:'POST',headers:{Origin:extensionOrigin,Authorization:'Bearer '+token,'Content-Type':'application/json','X-OGMK-Intent':'user'},body:JSON.stringify(sample)});assert.equal(afterRevoke.status,401);assert.equal(afterRevoke.headers.get('access-control-allow-origin'),extensionOrigin);
+  assert.deepEqual(Object.keys(app.store.read().accounts),['synthetic/demo']);
 });

@@ -1,9 +1,13 @@
 # Notices
 
-OGAMEKA Manual Preview 0.2.1 is distributed under Apache License 2.0 as described in [LICENSE-SCOPE.md](LICENSE-SCOPE.md).
+OGAMEKA Local Planner 0.3.0 is distributed under GNU GPL v3.0 only within the scope described in [LICENSE-SCOPE.md](LICENSE-SCOPE.md). The complete license text is in [LICENSE](LICENSE).
 
-The manual preview's application code, interface, capture extension and synthetic screenshots were prepared specifically for this edition. It contains no OGame/Gameforge artwork, historic extension bridge, catalog, Grafana image or runtime npm dependency. Node.js is an external prerequisite and is not bundled.
+Copyright © 2026 TaoKais and contributors for their respective original contributions.
 
-“OGame” and “Gameforge” are names of their respective owners. OGAMEKA is an independent, unofficial tool. Mention of the game identifies compatibility context only and does not imply affiliation, approval, endorsement or tolerance by Gameforge or Origin.
+The previous 0.2.1 preview was distributed under Apache-2.0. Its license applies to that earlier release and does not change the scope of this 0.3.0 release.
 
-The preview's Ko-fi link is an ordinary optional external link. It loads no embedded widget or third-party script. Contributions provide no access, feature unlock or gameplay advantage.
+This package contains no OGame/Gameforge artwork, imported game catalogs, historical tracker modules, Grafana image, or runtime npm dependencies. Node.js and the browser are external prerequisites. Screenshots show this project's synthetic demonstration and contain no account data.
+
+"OGame" and "Gameforge" identify their respective owners. OGAMEKA is an independent, unofficial tool. Mention of the game identifies compatibility context only; it does not imply affiliation, approval, endorsement, or toleration by Gameforge or Origin.
+
+The Ko-fi link is an ordinary optional external link. The product does not embed a payment widget or load third-party scripts; donations do not unlock features or provide gameplay advantages.

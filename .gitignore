@@ -1,4 +1,5 @@
 .data-independent/
+.data-ogameka/
 dist/
 node_modules/
 *.log

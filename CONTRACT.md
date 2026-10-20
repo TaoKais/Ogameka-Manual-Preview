@@ -1,6 +1,6 @@
 # Contrato económico versionado
 
-Identificador: `ogmk.capture/1`. Validador de referencia: `src/contract.mjs`. Solo objetos JSON cerrados; se rechazan claves ajenas, no se eliminan silenciosamente credenciales. No se aceptan URLs de sesión, cookies, mensajes, flotas o informes.
+Identificador: `ogmk.capture/1`. Validador de referencia: `src/contract.mjs`. Solo objetos JSON cerrados; se rechazan claves ajenas, no se eliminan silenciosamente credenciales. No se aceptan URLs de sesión, cookies, mensajes, flotas o informes. Este documento especifica el payload del puente local; esta edición no ofrece un importador para pegar JSON.
 
 ```json
 {

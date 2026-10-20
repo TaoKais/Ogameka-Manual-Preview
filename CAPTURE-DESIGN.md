@@ -1,25 +1,27 @@
-# Capture design and limits
+# Capture design, synchronization, and limits
 
-## Scope
+## User-triggered visible capture
 
-The MV3 extension performs a capture only after the user opens its action popup and presses **Capture current page**. It temporarily inspects the active OGame tab, reads selected visible DOM fields, and shows a versioned `ogmk.capture/1` JSON document for the user to review and copy into the local planner. It does not send the capture to any server.
+The MV3 extension runs no page script in the background. The user opens the popup and presses **Capturar y sincronizar**. `activeTab` and `scripting` grant temporary access to the current tab for that action; the adapter accepts HTTPS OGame Gameforge pages under `/game/` and reads only recognized visible DOM values. It never navigates, changes the selected planet, refreshes the game, or calls game APIs.
 
-The extension has only the `activeTab` and `scripting` permissions. It has no persistent OGame host permission, no background worker, no storage, no alarm, and no network API. It does not read cookies, local/session storage, hidden page scripts, messages, fleets, espionage reports, or other players' data. Missing values remain missing; there are no defaults that turn unknown production, energy, or bonuses into confirmed values.
+The adapter records observation time, source, and quality. It currently recognizes a subset of account identity, visible resources, body rows, technology levels, resource production settings, production summary, and bonus rows. Unrecognized values remain missing. The selectors are conservative and version-sensitive; synthetic fixtures validate the extraction contract but do not establish completeness on a live account.
 
-## Adapter behavior
+## Local synchronization
 
-The adapter accepts only HTTPS pages under an OGame Gameforge host and `/game/`. It reads the page's OGame account metadata, recognized resource nodes, and explicitly attributed technology-level or production nodes. On a visible Imperium table it attempts each identified planet/moon row; otherwise it attempts only the active body. It never changes the selected body or initiates an OGame request.
+Only the extension popup sends data, and only after the same explicit click. Optional host permission is restricted to `http://127.0.0.1:3176/*`. The user pairs the planner and extension with distinct, short-lived codes. The extension receives an upload-only credential; the server stores its hash, binds it to the extension origin, allows at most eight active credentials, and expires it after 24 hours. The server listens only on loopback and accepts only the upload route for that credential. It does not expose read, planning, export, retention, or deletion APIs to the extension.
 
-The supported DOM selectors are conservative and version-sensitive. An unrecognized page returns a visible error or a partial observation. The adapter does not claim complete production, settings, officer, lifeform, or bonus coverage. Live accuracy has not been verified against a logged-in account; synthetic DOM fixtures only validate the parser contract. The local planner blocks recommendations when critical data is absent or stale.
+There is no polling, background retry, delayed upload, OGame request, third-party relay, browser cloud sync, or automatic action. A missed capture is performed again by the user. Revocation is available in the extension popup and planner; service restart invalidates in-memory credentials.
 
-## Synchronization
+## Data and planning limits
 
-The user copies the reviewable JSON into the local planner's existing manual import. This version intentionally has no automatic extension-to-server bridge, pairing token, retry loop, or cross-origin transport. The local service remains bound to loopback and its existing authenticated import endpoint.
+The planner stores only the validated economic capture and local scenario inputs. It distinguishes observed, estimated, provisional, stale, and absent data. Critical missing values block relevant analysis; this is safer than presenting guessed defaults as verified. A captured DOM value is still an observation from a user-controlled browser, not cryptographic proof of game state.
 
-## Policy status
+Prices, durations, formulas, and outcome calculations are not certified against OGame. A bounded scenario result is not a proof of a global optimum and never executes an order.
 
-On 2026-10-20, the Origin Team's [toleration notice](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) said installed extensions that run on an OGame tab must be on the official Tolerated Tools list; publication in a browser store or a code repository does not establish toleration. The [forbidden-features guideline](https://forum.origin.ogame.gameforge.com/forum/thread/29-forbidden-features/) also requires minimizing background requests and forbids automation and undisclosed private-data transmission. This preview has not been submitted or declared tolerated. Do not use the extension on a live OGame account unless and until Origin lists the exact reviewed version.
+## Origin status
 
-## Provenance note
+The [Origin toleration notice](https://forum.origin.ogame.gameforge.com/forum/thread/320-important-for-users-about-toleration-and-tolerated-tools/) states that extensions installed to run on OGame tabs must be listed as tolerated. This exact version has not been listed or reviewed by Origin. A public source release, local-only transport, or user gesture does not itself establish tolerance. Do not use the capture extension on a live account unless Origin lists this exact version.
 
-The capture implementation in this edition is newly written for its explicit, one-click visible-DOM contract. The earlier OGameka/Empire Tracker implementation had already been inspected during this project, so this work is not represented as a formal clean-room process. It does not copy that implementation's capture or synchronization modules.
+## Provenance
+
+This edition's adapter and local upload bridge were authored for this standalone package after earlier tracker code had been inspected. We do not claim a formal clean-room process. The package excludes the old tracker collector and bridge, imported catalogs, OGame artwork, and the historical combined application. See [LICENSE-SCOPE.md](LICENSE-SCOPE.md).
