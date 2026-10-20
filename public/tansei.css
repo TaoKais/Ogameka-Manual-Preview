@@ -1,4 +1,4 @@
-/* OGAMEKA's local-planner layout: a compact orbital console with a persistent
+/* Ogameka's local-planner layout: a compact orbital console with a persistent
    navigation rail. This layer changes presentation only; app.js owns behavior. */
 :root{--tansei-night:#071321;--tansei-panel:#0d1b2b;--tansei-border:rgba(142,177,198,.16);--tansei-gold:#d5b46d;--tansei-teal:#74d4c1}
 body{background:radial-gradient(ellipse at 72% -10%,rgba(37,101,119,.18),transparent 35%),linear-gradient(145deg,#071321 0%,#091725 52%,#07111e 100%)}

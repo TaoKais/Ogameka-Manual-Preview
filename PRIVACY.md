@@ -1,6 +1,6 @@
 # Privacy and local data flow
 
-OGAMEKA has no telemetry, advertising, central account, or analytics endpoint. The planner binds to `127.0.0.1:3176`; the extension's optional network permission targets that loopback host. The extension's capture request is made only after a button click and is sent to the paired local service. It does not send data to OGame, Gameforge, Ko-fi, GitHub, or a project server.
+Ogameka has no telemetry, advertising, central account, or analytics endpoint. The planner binds to `127.0.0.1:3176`; the extension's optional network permission targets that loopback host. The extension's capture request is made only after a button click and is sent to the paired local service. It does not send data to OGame, Gameforge, Ko-fi, GitHub, or a project server.
 
 ## Extension permissions and capture
 
@@ -20,10 +20,10 @@ The local store contains captured account identity, body identifiers and names, 
 
 The synthetic demo is marked as synthetic. Imported/manual JSON is not available in the user interface. The contract and server validate the extension payload and preserve source, quality, and timestamps; this does not independently prove that data came from OGame.
 
-The support diagnostic contains minimized counts and quality categories rather than names, account keys, coordinates, quantities, levels, or dates. Review any export before sharing it. Browser, operating-system, backup, and user-selected synchronization software may retain copies outside OGAMEKA's control.
+The support diagnostic contains minimized counts and quality categories rather than names, account keys, coordinates, quantities, levels, or dates. Review any export before sharing it. Browser, operating-system, backup, and user-selected synchronization software may retain copies outside Ogameka's control.
 
 ## Deletion and scope
 
-The deletion control clears this instance's store, local backups, temporary recovery files, panel session, pending pairing codes, and active extension tokens. It does not erase exported diagnostics, system backups, other browser-profile data, previous OGAMEKA installations, or Docker volumes.
+The deletion control clears this instance's store, local backups, temporary recovery files, panel session, pending pairing codes, and active extension tokens. It does not erase exported diagnostics, system backups, other browser-profile data, previous Ogameka installations, or Docker volumes.
 
 This document describes product behavior, not a complete legal privacy notice. The controller, legal basis, and obligations for any public distribution depend on the actual operator and use; they require a separate assessment before offering a hosted service. This release has no hosted service.

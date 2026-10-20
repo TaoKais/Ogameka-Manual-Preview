@@ -1,8 +1,8 @@
-﻿# OGAMEKA Local Planner
+﻿# Ogameka
 
 **A local-first OGame economy viewer and scenario planner.** The browser extension reads selected values from the page you opened after an explicit click, then sends the validated capture to the planner running on your computer.
 
-> **Pre-release 0.3.0.** This extension has not been declared tolerated by Origin. Do not capture a live OGame account unless Origin lists this exact version as tolerated. OGAMEKA is unofficial; this release does not establish approval, legal permission from Gameforge, or validation of game formulas.
+> **Pre-release 0.3.0.** This extension has not been declared tolerated by Origin. Do not capture a live OGame account unless Origin lists this exact version as tolerated. Ogameka is unofficial; this release does not establish approval, legal permission from Gameforge, or validation of game formulas.
 
 **Español:** [guía en español](#español) · **English:** [overview and setup](#english)
 
@@ -10,9 +10,9 @@
 
 Screenshots use the built-in synthetic scenario. They contain no player or account data.
 
-![OGAMEKA local planner in its TANSEI-inspired layout, showing the sidebar, planet production sectors, histogram and scenario controls with synthetic data](public/screenshots/overview.png)
+![Ogameka in its TANSEI-inspired layout, showing the sidebar, planet production sectors, histogram and scenario controls with synthetic data](public/screenshots/overview.png)
 
-![OGAMEKA TANSEI-inspired Model and Data page, with local extension pairing, retention and deletion controls](public/screenshots/privacy-and-retention.png)
+![Ogameka TANSEI-inspired Model and Data page, with local extension pairing, retention and deletion controls](public/screenshots/privacy-and-retention.png)
 
 ![Life in the Empire view with per-planet lifeform building and research levels from synthetic data](public/screenshots/life-in-empire.png)
 
@@ -52,7 +52,7 @@ Requires Node.js 24.x and Chrome, Edge or Opera GX. No runtime package download 
    node .\src\server.mjs
    ```
 
-   Both checks should print `True`. Keep the window open. The service prints `OGAMEKA local planner: http://127.0.0.1:3176` and stores data in `.data-ogameka` under this folder. Use a private local folder.
+   Both checks should print `True`. Keep the window open. The service prints `Ogameka: http://127.0.0.1:3176` and stores data in `.data-ogameka` under this folder. Use a private local folder.
 
 3. Open <http://127.0.0.1:3176>. Read `.data-ogameka\pair-code.txt` in a second PowerShell window and enter it in the planner. The code expires after five minutes and pairs only this local panel session.
 4. Load the extracted repository folder as an unpacked extension: `opera://extensions`, `chrome://extensions`, or `edge://extensions` → enable Developer mode → **Load unpacked**. Select the folder containing the root `manifest.json`.
@@ -103,7 +103,7 @@ Necesitas Node.js 24.x y Chrome, Edge u Opera GX. No hace falta descargar paquet
    node .\src\server.mjs
    ```
 
-   Las dos comprobaciones deben devolver `True`. Mantén la ventana abierta. El servicio mostrará `OGAMEKA local planner: http://127.0.0.1:3176` y guardará los datos en `.data-ogameka`. Usa una carpeta local y privada.
+   Las dos comprobaciones deben devolver `True`. Mantén la ventana abierta. El servicio mostrará `Ogameka: http://127.0.0.1:3176` y guardará los datos en `.data-ogameka`. Usa una carpeta local y privada.
 
 3. Abre <http://127.0.0.1:3176>. En otra ventana de PowerShell, lee `.data-ogameka\pair-code.txt` e introduce el código en el planificador. Caduca a los cinco minutos y empareja la sesión del panel local.
 4. Carga la carpeta extraída como extensión sin empaquetar: `opera://extensions`, `chrome://extensions` o `edge://extensions` → activa el modo desarrollador → **Cargar descomprimida**. Selecciona la carpeta que contiene el `manifest.json` raíz.

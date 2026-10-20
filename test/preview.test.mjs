@@ -37,7 +37,7 @@ test('the local server serves the TANSEI navigation layer used by the real dashb
   assert.match(await style.text(),/\.tansei-sidebar/);
 });
 
-test('OGAMEKA planner pairs locally and calculates the synthetic scenario',async t=>{
+test('Ogameka pairs locally and calculates the synthetic scenario',async t=>{
   const app=await setup(t),page=await fetch(app.url),html=await page.text();
   assert.equal(page.status,200);
   assert.match(html,/https:\/\/ko-fi\.com\/yahvveh/);

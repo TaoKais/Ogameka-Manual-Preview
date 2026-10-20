@@ -1,4 +1,4 @@
-﻿# How to use OGAMEKA Local Planner
+﻿# How to use Ogameka
 
 This guide covers the local planner, browser extension, one-time pairing, synthetic demo, and local data controls. The extension has not been declared tolerated by Origin. Do not capture a live account unless Origin lists this exact version.
 
@@ -58,7 +58,7 @@ For a real capture, inspect source, timestamp, quality, missing fields, and prod
 
 ## 7. Retention, export, and deletion
 
-In **Datos y privacidad**, set the retention limits, export a minimized support diagnostic, revoke extension credentials, or delete this instance's local store. Deletion invalidates local sessions and extension tokens. It does not erase exported files, operating-system backups, browser-profile backups, or other OGAMEKA installations.
+In **Datos y privacidad**, set the retention limits, export a minimized support diagnostic, revoke extension credentials, or delete this instance's local store. Deletion invalidates local sessions and extension tokens. It does not erase exported files, operating-system backups, browser-profile backups, or other Ogameka installations.
 
 ## 8. Stop the service
 

@@ -2,7 +2,7 @@
 
 ## Current edition
 
-The original code and documentation prepared for **OGAMEKA Local Planner 0.3.0** in this standalone edition are offered under **GNU General Public License v3.0 only**. The grant covers the local planner, its user-triggered Manifest V3 capture adapter, the loopback-only upload bridge, tests, documentation, and screenshots of this interface, to the extent those materials are original contributions whose rights are controlled by the project maintainer.
+The original code and documentation prepared for **Ogameka 0.3.0** in this standalone edition are offered under **GNU General Public License v3.0 only**. The grant covers the local planner, its user-triggered Manifest V3 capture adapter, the loopback-only upload bridge, tests, documentation, and screenshots of this interface, to the extent those materials are original contributions whose rights are controlled by the project maintainer.
 
 The license does not grant rights to OGame or Gameforge names, trademarks, game rules, artwork, text, web services, or other third-party material. It does not cover files from the historic combined OGameka/Empire Tracker tree, the old tracker capture service, imported catalogs, Grafana, browser vendors' software, or third-party components not identified as included in `NOTICE.md`.
 

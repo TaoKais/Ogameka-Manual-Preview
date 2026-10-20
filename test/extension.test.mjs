@@ -25,7 +25,7 @@ class Table extends Element {
 test('MV3 manifest is loadable and scopes local sync to one optional loopback host',async()=>{
   const manifest=JSON.parse(await fs.readFile(new URL('../manifest.json',import.meta.url),'utf8'));
   assert.equal(manifest.manifest_version,3);
-  assert.equal(manifest.name,'OGAMEKA Local Planner');assert.equal(manifest.version,'0.3.0');
+  assert.equal(manifest.name,'Ogameka');assert.equal(manifest.version,'0.3.0');
   assert.deepEqual(manifest.permissions,['activeTab','scripting','storage']);
   assert.equal(manifest.host_permissions,undefined);
   assert.deepEqual(manifest.optional_host_permissions,['http://127.0.0.1:3176/*']);

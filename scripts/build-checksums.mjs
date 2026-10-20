@@ -13,6 +13,6 @@ async function filesAt(relative){
 }
 const files=[...new Set((await Promise.all(roots.map(filesAt))).flat())].sort((a,b)=>a.localeCompare(b,'en'));
 const records=[];for(const relative of files){const data=await fs.readFile(path.join(project,relative));records.push({path:relative,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex')});}
-const document={format:1,edition:'ogameka-local-planner',version:'0.3.0',license:'GPL-3.0-only (scope defined by LICENSE-SCOPE.md)',files:records,excluded:['historic integrated application and tracker collector','third-party OGame/Gameforge assets, text and catalogs','runtime dependencies','account data and secrets']};
+const document={format:1,edition:'ogameka',version:'0.3.0',license:'GPL-3.0-only (scope defined by LICENSE-SCOPE.md)',files:records,excluded:['historic integrated application and tracker collector','third-party OGame/Gameforge assets, text and catalogs','runtime dependencies','account data and secrets']};
 await fs.writeFile(path.join(project,'SHA256SUMS.json'),JSON.stringify(document,null,2)+'\n','utf8');
 console.log(`Wrote ${records.length} file hashes for ${document.edition} ${document.version}`);

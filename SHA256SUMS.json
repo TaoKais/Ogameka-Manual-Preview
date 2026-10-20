@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "edition": "ogameka-local-planner",
+  "edition": "ogameka",
   "version": "0.3.0",
   "license": "GPL-3.0-only (scope defined by LICENSE-SCOPE.md)",
   "files": [
@@ -42,7 +42,7 @@
     {
       "path": "extension/popup.html",
       "bytes": 1668,
-      "sha256": "0a2da15c811fbfed8b50bf3689954fd5c998f5e2aafca898a252587933db383f"
+      "sha256": "bde9dabdb7928cb38efa31c0501cc929211ebbf966856e83bb6dc7f39cd685b1"
     },
     {
       "path": "extension/popup.js",
@@ -51,8 +51,8 @@
     },
     {
       "path": "HOWTO.md",
-      "bytes": 5868,
-      "sha256": "31950f527d578ce18b30e85507c0819326f9e2b48d820e5536a067ee7c195be9"
+      "bytes": 5854,
+      "sha256": "727157361503ca332d96b3f07e9e2f58e9323fd8489a36c05eb6d72e544c3ec9"
     },
     {
       "path": "LICENSE",
@@ -61,33 +61,33 @@
     },
     {
       "path": "LICENSE-SCOPE.md",
-      "bytes": 3098,
-      "sha256": "6ecb1e0defea2d9ce28e3e9455e8c8142bd806830c8ef32ea51de004481c137d"
+      "bytes": 3084,
+      "sha256": "990c42a909d4b40449d6d7a37ff9e112e3e0f3e264e85a119d2506ba4a2f6284"
     },
     {
       "path": "manifest.json",
-      "bytes": 428,
-      "sha256": "d81f4656e8a460b584c06eba553537874a68f810291b95f9921e551b40728faf"
+      "bytes": 386,
+      "sha256": "d48fd831e38ca7be233c0dd09fdeecd40ef1ba42639a1cbf9bc42ff548f3b533"
     },
     {
       "path": "MIGRATION.md",
       "bytes": 1415,
-      "sha256": "cad5d649f63d3a6403795de860ed2d837df1a8397da8f932ae9a3dabc2e057f9"
+      "sha256": "e9b3c36b784ba22f3e77911c39401f05b1d0868398fa227dd7ba7a0882794aa3"
     },
     {
       "path": "NOTICE.md",
-      "bytes": 1177,
-      "sha256": "f331cce295187f0ec113ae1ba72c7b836e37c793f1b13c0a58cd8c68baf6bdbc"
+      "bytes": 1163,
+      "sha256": "66e5405eb1683cceffc2be2356f26bee49a18c2c32f2e18c04ff113c7cccba00"
     },
     {
       "path": "package.json",
-      "bytes": 274,
-      "sha256": "5b5878a07c4a6fd8509c05319b05142db55f53e287ee64983e1e4b99646940d9"
+      "bytes": 260,
+      "sha256": "ddf62eebdedff9c75775a0f8f67bb0a6b8bd225a39014075343af9dac75c24da"
     },
     {
       "path": "PRIVACY.md",
       "bytes": 3837,
-      "sha256": "94da747ad4dbfa7e9bf9d2a8b41d905ffd403b37c9cd3fb0c40caa085b0aa3cc"
+      "sha256": "9eee6de44c8fa127d5d3df93418ecff8c2f8eb49549f4508318faa2ef70567a3"
     },
     {
       "path": "public/app.js",
@@ -96,28 +96,28 @@
     },
     {
       "path": "public/index.html",
-      "bytes": 14817,
-      "sha256": "cfd7a6f70a6d16869a28997894fc70ce2a9ce57c510e4d4463d16adb7e1fa724"
+      "bytes": 14762,
+      "sha256": "b3b508c54f4c373b56823a7df91d2d1521c7fe69d655f744a581b7201486fdd9"
     },
     {
       "path": "public/screenshots/life-in-empire.png",
-      "bytes": 334368,
-      "sha256": "cc167f34ac7bbd032c190b77dfa61a6ee61a4f3bae21ddc500f2d2a725ca25b2"
+      "bytes": 334137,
+      "sha256": "e2663a29e96766305ee3c8ca0d668b5316adccca0d08d1fa080a6f045a2f5ba7"
     },
     {
       "path": "public/screenshots/overview.png",
-      "bytes": 512430,
-      "sha256": "6c6c17c8a135131ca549abee19fe8ca7c394bb9ba370226e88d68bb2bcbb606a"
+      "bytes": 512235,
+      "sha256": "048f7cf4d8334bb3f2f33ca8347c1b76327d39729623753a7558f59187cc9922"
     },
     {
       "path": "public/screenshots/planning-matrix.png",
-      "bytes": 335449,
-      "sha256": "452b0f85fd2e3200f8d64f2e6727e4853b6ce85edb68276b9594d5e0f4c965f6"
+      "bytes": 335261,
+      "sha256": "bec12213271fba01a493586c5f28baaca3e4902e9cde7fd9273b60cc51e24b41"
     },
     {
       "path": "public/screenshots/privacy-and-retention.png",
-      "bytes": 362171,
-      "sha256": "b54041cb3eb4a14d3eca53f37ae844b5b9274e72aaf59c72b70f0fd5a148fe68"
+      "bytes": 361130,
+      "sha256": "c3dec2d3bcacef4d349b6f471dfeac042b004c4d9a6e38083f685b8f0f18a942"
     },
     {
       "path": "public/style.css",
@@ -127,17 +127,17 @@
     {
       "path": "public/tansei.css",
       "bytes": 7818,
-      "sha256": "20114a83aad65d9a9a7f1bb249e118941e926c71431c668baa5d61762bba1639"
+      "sha256": "85bbb2309579452515bae392b983f617bf7c33312d8a638f2fcf1818f90c6b6f"
     },
     {
       "path": "README.md",
-      "bytes": 10841,
-      "sha256": "bc76edb0f5f933305ea2c421dba72f2f83a0c331e356cf5f0090975fb14de162"
+      "bytes": 10785,
+      "sha256": "d167b2d0d4cfaac3b76891162f8b6ea1ff2446839203560a0fa3eb09853371ea"
     },
     {
       "path": "scripts/build-checksums.mjs",
-      "bytes": 1770,
-      "sha256": "dcc24de08c98621d3d45dbb6b9b1d932c41f52e0ec4d53268d66f1136bc6832a"
+      "bytes": 1756,
+      "sha256": "8fc1660c5b642baec35626d430de27152ec1c9733f15d23fdee5214bdfa45e01"
     },
     {
       "path": "src/archive.mjs",
@@ -171,8 +171,8 @@
     },
     {
       "path": "src/server.mjs",
-      "bytes": 12019,
-      "sha256": "4e39b4e61e5e0daa620ef1972581a3e64fd382f008fe233bcdf60a5492e3c84d"
+      "bytes": 11991,
+      "sha256": "17a134dbc84d223bc330b79fdfeb0208af7527a7c0f67de4ced05d0afac2e82e"
     },
     {
       "path": "src/store.mjs",
@@ -186,18 +186,18 @@
     },
     {
       "path": "test/extension.test.mjs",
-      "bytes": 5295,
-      "sha256": "7dc950d99add1665a461f6e68e2d1ff016004f2cf58d23c12c80673fff24267e"
+      "bytes": 5281,
+      "sha256": "48f00853626e13ee8aec4aa1944ebff72e732da19d7c94735a249ca2ee103f69"
     },
     {
       "path": "test/preview.test.mjs",
-      "bytes": 5791,
-      "sha256": "8188b8baf1e01dc16b704474b2ed3a0e3cf38d911c9fdbb1e75bcf350620ff15"
+      "bytes": 5783,
+      "sha256": "40bca85b4b35d8a5589fa1e00f8031f13d1a94894a1ffe772525e71fb6f5a6a2"
     },
     {
       "path": "test/release.test.mjs",
-      "bytes": 725,
-      "sha256": "3fa3e096663ce84d47b4e34192c626c196d11c3bcdaf9ffac4c5ba3d316ad359"
+      "bytes": 711,
+      "sha256": "21d6d72cde465d7cc265fe13b59401d25c0bd90165fb6036686149d5325c56c9"
     }
   ],
   "excluded": [

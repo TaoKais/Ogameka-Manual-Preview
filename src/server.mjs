@@ -87,7 +87,7 @@ export async function createApp({dir,port=0,workerTimeout=LIMITS.workerMs,onPair
       if(req.method==='POST'&&req.url==='/api/retention')return send(res,200,await store.retention(await readBody(req,1024)));
       if(req.method==='GET'&&req.url==='/api/support')return send(res,200,supportExport(store.read()));
       if(req.method==='DELETE'&&req.url==='/api/data'){
-        const data=await readBody(req,1024);object(data,['scope','confirm'],'deletion');if(data.scope!=='independent-store-only'||data.confirm!=='BORRAR OGAMEKA INDEPENDIENTE')throw new InputError('Deletion scope confirmation required');
+        const data=await readBody(req,1024);object(data,['scope','confirm'],'deletion');if(data.scope!=='independent-store-only'||data.confirm!=='BORRAR Ogameka')throw new InputError('Deletion scope confirmation required');
         dataEpoch++;sessions.clear();extensionTokens.clear();extensionCodes.clear();extensionAttempts.clear();const result=await store.wipe();return send(res,200,result,{'Set-Cookie':'ogmk_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0'});
       }
       send(res,404,{error:'Unknown endpoint'});
@@ -101,6 +101,6 @@ export async function createApp({dir,port=0,workerTimeout=LIMITS.workerMs,onPair
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const dir=process.env.OGMK_DATA_DIR||path.join(process.cwd(),'.data-ogameka'),port=Number(process.env.OGMK_PORT||3176);
   if(!Number.isInteger(port)||port<1024||port>65535)throw Error('Invalid isolated port');
-  const codeFile=path.join(dir,'pair-code.txt'),removeCode=()=>fs.unlink(codeFile).catch(()=>{}),app=await createApp({dir,port,onPaired:removeCode});await fs.writeFile(codeFile,app.pairCode,{mode:0o600});setTimeout(removeCode,300000).unref();console.log('OGAMEKA local planner: '+app.url);console.log('Read the one-time panel code from the private data directory (pair-code.txt). It expires in five minutes.');
+  const codeFile=path.join(dir,'pair-code.txt'),removeCode=()=>fs.unlink(codeFile).catch(()=>{}),app=await createApp({dir,port,onPaired:removeCode});await fs.writeFile(codeFile,app.pairCode,{mode:0o600});setTimeout(removeCode,300000).unref();console.log('Ogameka: '+app.url);console.log('Read the one-time panel code from the private data directory (pair-code.txt). It expires in five minutes.');
   for(const signal of ['SIGINT','SIGTERM'])process.once(signal,async()=>{await removeCode();await app.close();process.exit(0);});
 }
